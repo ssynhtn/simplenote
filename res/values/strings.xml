@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyPagerTabs</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- MainActivity note tabs title -->
+    <string name="note_title">NOTES</string>
+    <string name="private_note_title">PRIVATE NOTES</string>
+
+    <!-- change color of action bar -->
+    <string name="action_change_color">GREEN</string>
+    <string name="title_activity_note_detail">NoteDetailActivity</string>
+
+    <!-- NoteFragment add new note action button -->
+    <string name="action_add_note">New Note</string>
+    <string name="title_activity_new_note">NewNoteActivity</string>
+
+</resources>

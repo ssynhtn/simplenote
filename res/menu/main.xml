@@ -3,10 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ssynhtn.mypagertabs.MainActivity" >
 
-    <item android:id="@+id/action_change_color"
-        android:title="@string/action_change_color"
-        app:showAsAction="ifRoom"
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search_title"
+        android:icon="@android:drawable/ic_search_category_default"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.widget.SearchView"
         />
+    
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

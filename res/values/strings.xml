@@ -7,7 +7,8 @@
 
     <!-- MainActivity note tabs title -->
     <string name="note_title">NOTES</string>
-    <string name="private_note_title">PRIVATE NOTES</string>
+    <string name="private_note_title">NOTIFICATION NOTES</string>
+    <string name="recycle_note_title">Recycle Notes</string>
 
     <!-- change color of action bar -->
     <string name="action_change_color">GREEN</string>
@@ -16,5 +17,17 @@
     <!-- NoteFragment add new note action button -->
     <string name="action_add_note">New Note</string>
     <string name="title_activity_new_note">NewNoteActivity</string>
+
+    <!-- NoteFragment ActionMode action buttons -->
+    <string name="action_mode_delete">Delete</string>
+    <string name="action_mode_copy">Copy</string>
+
+    <!-- NoteDetailFragment action buttons -->
+    <string name="action_share_note">Share</string>
+
+    <!-- ActionBar action_search -->
+    <string name="action_search_hint">Search Your Notes</string>
+    <string name="action_search_title">Search</string>
+    <string name="title_activity_search_result">SearchResultActivity</string>
 
 </resources>

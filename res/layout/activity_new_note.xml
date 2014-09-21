@@ -8,18 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.ssynhtn.mypagertabs.NewNoteActivity" >
 
-    <EditText
-        android:id="@+id/new_note_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:ems="10"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
-
     <Button
         android:id="@+id/new_note_button"
         android:layout_width="wrap_content"
@@ -27,5 +15,34 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/new_note_edittext"
         android:text="Create Note" />
+
+    <Button
+        android:id="@+id/cancel_note_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/new_note_button"
+        android:layout_alignBottom="@+id/new_note_button"
+        android:layout_toRightOf="@+id/new_note_button"
+        android:text="Cancel" />
+
+    <EditText
+        android:id="@+id/new_note_title_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/new_note_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/new_note_title_edittext"
+        android:ems="10"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

@@ -1,28 +1,42 @@
 package com.ssynhtn.mypagertabs;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-public class NoteDetailActivity extends ActionBarActivity {
+import com.ssynhtn.mypagertabs.NoteDetailFragment.OnDeleteNoteListener;
+
+public class NoteDetailActivity extends ActionBarActivity implements OnDeleteNoteListener{
 	
-	public static final String EXTRA_NOTE = "extra_note";
+	private static final String TAG = NoteDetailActivity.class.getSimpleName();
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_note_detail);
-		if (savedInstanceState == null && getIntent().hasExtra(EXTRA_NOTE)) {
-			String note = getIntent().getStringExtra(EXTRA_NOTE);
+		if (savedInstanceState == null) {
+			NoteDetailFragment fragment = createDetailFragmentFromIntent(getIntent());
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, NoteDetailFragment.newInstance(note)).commit();
+					.add(R.id.container, fragment).commit();
 		}
+	}
+
+	private NoteDetailFragment createDetailFragmentFromIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		if(intent.getData() != null){
+			return NoteDetailFragment.newInstance(intent.getData());
+		}else if(intent.hasExtra(NoteDetailFragment.EXTRA_NOTE)){
+			String note = intent.getStringExtra(NoteDetailFragment.EXTRA_NOTE);
+			return NoteDetailFragment.newInstance(note, note, note);
+		}else {
+			Log.d(TAG, "bad intent: " + intent);
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -44,33 +58,11 @@ public class NoteDetailActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class NoteDetailFragment extends Fragment {
-
-		public NoteDetailFragment() {
-		}
+	@Override
+	public void onDeleteNote() {
+		finish();
 		
-		public static NoteDetailFragment newInstance(String note){
-			Bundle args = new Bundle();
-			args.putString(EXTRA_NOTE, note);
-			
-			NoteDetailFragment fragment = new NoteDetailFragment();
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_note_detail,
-					container, false);
-			
-			TextView noteView = (TextView) rootView.findViewById(R.id.note_textview);
-			String note = getArguments().getString(EXTRA_NOTE);
-			noteView.setText(note);
-			return rootView;
-		}
 	}
+
+
 }

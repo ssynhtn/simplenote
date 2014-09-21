@@ -1,23 +1,31 @@
 package com.ssynhtn.mypagertabs.data;
 
-import org.apache.http.client.utils.URIUtils;
+import java.util.Arrays;
 
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-
+import android.app.SearchManager;
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
-import android.test.suitebuilder.annotation.SmallTest;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.ssynhtn.mypagertabs.MyUtilities;
+import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 
 public class NoteProvider extends ContentProvider {
 	
-	public static final int NOTE = 0;
-	public static final int SINGLE_NOTE = 1;
+	public static final String TAG = MyUtilities.createTag(NoteProvider.class);
 	
+	public static final int NOTES = 0;
+	public static final int SINGLE_NOTE = 1;
+	public static final int SEARCH_SUGGEST = 2;
+		
 	private static UriMatcher sUriMatcher = initUriMatcher();
 	
 	private NoteDbHelper mHelper;
@@ -25,26 +33,52 @@ public class NoteProvider extends ContentProvider {
 	public static UriMatcher initUriMatcher(){
 		UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
 		
-		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_NOTE, NOTE);
+		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_NOTE, NOTES);
 		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_NOTE + "/#", SINGLE_NOTE);
+		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_NOTE + "/" + SearchManager.SUGGEST_URI_PATH_QUERY, SEARCH_SUGGEST);
+		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_NOTE + "/" + SearchManager.SUGGEST_URI_PATH_QUERY + "/*", SEARCH_SUGGEST);
 		return matcher;
 	}
 	
 	@Override
-	public int delete(Uri arg0, String arg1, String[] arg2) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(Uri uri, String selection, String[] selectionArgs) {
+		int code = sUriMatcher.match(uri);	
+		SQLiteDatabase db = mHelper.getWritableDatabase();
+		int numDeleted;
+		
+		switch(code){
+		case SINGLE_NOTE: {
+			long id = ContentUris.parseId(uri);
+			String mySelection = NoteEntry._ID + " = " + id;
+			if(selection != null){
+				mySelection = mySelection + " and " + selection;
+			}
+			// here only use the id to delete a note but ignores the selection part
+			numDeleted = db.delete(NoteContract.NoteEntry.TABLE_NAME, mySelection, selectionArgs);
+			break;
+		}
+		case NOTES: {
+			numDeleted = db.delete(NoteEntry.TABLE_NAME, selection, selectionArgs);
+			break;
+		}
+		
+		default: numDeleted = 0; break;
+		}
+		
+		getContext().getContentResolver().notifyChange(uri, null);
+		return numDeleted;
 	}
 
 	@Override
 	public String getType(Uri uri) {
 		int code = sUriMatcher.match(uri);
 		switch(code){
-		case NOTE: return NoteEntry.CONTENT_TYPE;
+		case NOTES: return NoteEntry.CONTENT_TYPE;
 		case SINGLE_NOTE: return NoteEntry.CONTENT_TYPE_ITEM;
-		default: break;
+		case SEARCH_SUGGEST: return NoteEntry.CONTENT_TYPE;	// search suggest kinds of return a list
+		default: throw new IllegalArgumentException("Unknown uri's type: " + uri);	// no match
 		}
-		return null;
+		
 	}
 
 	@Override
@@ -54,18 +88,20 @@ public class NoteProvider extends ContentProvider {
 		SQLiteDatabase db = mHelper.getWritableDatabase();
 		Uri res = null;
 		switch(code){
-		case NOTE: {
+		case NOTES: {
 			long id = db.insert(NoteEntry.TABLE_NAME, null, values);
 			if(id == -1){
-				throw new UnsupportedOperationException("can't insert uri: " + uri);
+				throw new IllegalArgumentException("can't insert uri: " + uri + " with values: " + values);
 			}
 
-			res = NoteContract.buildSingleNoteUri(id);
+			res = NoteEntry.buildSingleNoteUri(id);
 			break;
 		}
 		
-		default: throw new UnsupportedOperationException("bad uri: " + uri);
+		default: throw new IllegalArgumentException("Unknown type of uri: " + uri);
 		}
+		
+		getContext().getContentResolver().notifyChange(uri, null);
 		return res;
 	}
 
@@ -81,31 +117,71 @@ public class NoteProvider extends ContentProvider {
 		
 		SQLiteDatabase db = mHelper.getReadableDatabase();
 		
+		Log.d(TAG, "query for uri: " + uri);
+		
 		Cursor res = null;
 		int code = sUriMatcher.match(uri);
 		switch(code){
-		case NOTE: {
+		case NOTES: {
+			Log.d(TAG, "query is for note list");
 			res = db.query(NoteEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, order);
 			break;
 		}
 		case SINGLE_NOTE: {
 			long noteId = ContentUris.parseId(uri);
-			selection = NoteEntry._ID + " = ";
+			Log.d(TAG, "query for single note with id " + noteId);
+			
+			selection = NoteEntry._ID + " = ? ";
 			selectionArgs = new String[]{Long.toString(noteId)};
 			res = db.query(NoteEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, order);
 			break;
 		}
-		default: break;
+		case SEARCH_SUGGEST: {
+//			String mySelection = NoteEntry.COLUMN_NOTE + " like ?";
+			// currently not handling anything but returning a null cursor
+			// show the args, if args are with spaces..
+			Log.d(TAG, "selection args: " + Arrays.asList(selectionArgs));
+			
+			String query = selectionArgs[0].trim();
+			// show nothing for empty search query
+			if(TextUtils.isEmpty(query)){
+				return null;
+			}
+			
+			String mySelection = NoteEntry.COLUMN_TITLE + " like ? OR " + NoteEntry.COLUMN_NOTE + " like ?";
+			String[] mySelectionArgs = {"%" + query + "%", "%" + query + "%"};
+			res = db.query(NoteEntry.TABLE_NAME, projection, mySelection, mySelectionArgs, null, null, null);
+			break;
+		}
+		default: {
+			Log.d(TAG, "some how no type match!");
+			break;
+			
+		}
 		}
 		
+		ContentResolver resolver = getContext().getContentResolver();
+		Log.d(TAG, "resolver: " + resolver);
+		Log.d(TAG, "uri: " + uri);
+		Log.d(TAG, "res cursor: " + res);
 		res.setNotificationUri(getContext().getContentResolver(), uri);
 		return res;
 	}
 
 	@Override
-	public int update(Uri arg0, ContentValues arg1, String arg2, String[] arg3) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+		
+		int code = sUriMatcher.match(uri);
+		if(code != NOTES && code != SINGLE_NOTE){
+			Log.d(TAG, "unexpected uri: " + uri);
+			throw new IllegalArgumentException("unexpected uri: " + uri);
+		}
+		
+		SQLiteDatabase db = mHelper.getWritableDatabase();
+		int numModified = db.update(NoteEntry.TABLE_NAME, values, selection, selectionArgs);
+		
+		getContext().getContentResolver().notifyChange(uri, null);
+		return numModified;
 	}
 
 }

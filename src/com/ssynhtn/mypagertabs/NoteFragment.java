@@ -64,19 +64,7 @@ public class NoteFragment extends BaseNoteFragment {
 		adapter.swapCursor(null);
 		
 	}
-//
-//	@Override
-//	protected int putToRecycleOrPermanentDelete(String title, String note,
-//			String date) {
-//		ContentResolver resolver = getActivity().getContentResolver();
-//		ContentValues values = new ContentValues();
-//		values.put(NoteEntry.COLUMN_RECYCLE, 1);
-//		
-//		String selection = NoteEntry.COLUMN_TITLE + " = ? and " + NoteEntry.COLUMN_NOTE + " = ? and " + NoteEntry.COLUMN_DATE + " = ? ";
-//		String[] selectionArgs = new String[]{title, note, date};
-//		int numToRecycle = resolver.update(NoteEntry.CONTENT_URI, values, selection, selectionArgs);
-//		return numToRecycle;
-//	}
+
 
 	@Override
 	protected int putToRecycleOrPermanentDelete(long id) {

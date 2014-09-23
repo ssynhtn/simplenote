@@ -6,19 +6,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteJoinReminder;
-import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
+import com.ssynhtn.mypagertabs.data.NoteContract.ReminderNoteEntry;
 
 public class NotificationNoteFragment extends BaseNoteFragment{
 	
@@ -49,7 +44,8 @@ public class NotificationNoteFragment extends BaseNoteFragment{
 		// TODO Auto-generated method stub
 		String selection = NoteEntry.COLUMN_RECYCLE + " = 0";
 		String order = NoteEntry.COLUMN_DATE + " DESC";
-		return new CursorLoader(getActivity(), NoteJoinReminder.CONTENT_URI, null, selection, null, order);
+//		return new CursorLoader(getActivity(), NoteJoinReminder.CONTENT_URI, null, selection, null, order);
+		return new CursorLoader(getActivity(), ReminderNoteEntry.CONTENT_URI, null, selection, null, order);
 
 	}
 
@@ -65,19 +61,6 @@ public class NotificationNoteFragment extends BaseNoteFragment{
 		// TODO Auto-generated method stub
 		adapter.swapCursor(null);
 	}
-
-//	@Override
-//	protected int putToRecycleOrPermanentDelete(String title, String note,
-//			String date) {
-//		ContentResolver resolver = getActivity().getContentResolver();
-//		ContentValues values = new ContentValues();
-//		values.put(NoteEntry.COLUMN_RECYCLE, 1);
-//		
-//		String selection = NoteEntry.COLUMN_TITLE + " = ? and " + NoteEntry.COLUMN_NOTE + " = ? and " + NoteEntry.COLUMN_DATE + " = ? ";
-//		String[] selectionArgs = new String[]{title, note, date};
-//		int numToRecycle = resolver.update(NoteEntry.CONTENT_URI, values, selection, selectionArgs);
-//		return numToRecycle;
-//	}
 
 	@Override
 	protected int putToRecycleOrPermanentDelete(long id) {

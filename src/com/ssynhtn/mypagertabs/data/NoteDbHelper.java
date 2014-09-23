@@ -7,15 +7,14 @@ import android.util.Log;
 
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
+import com.ssynhtn.mypagertabs.data.NoteContract.ReminderNoteEntry;
 
 public class NoteDbHelper extends SQLiteOpenHelper {
 	private static final String TAG = NoteDbHelper.class.getSimpleName();
 	
 	private static final String DATABASE_NAME = "notes.db";
 	
-	// add trigger and search_suggest_id column
-	private static final int OLD_DATABASE_VERSION = 5;
-	private static final int DATABASE_VERSION = 6;
+	private static final int DATABASE_VERSION = 7;
 
 	public NoteDbHelper(Context context,
 			int version) {
@@ -56,9 +55,21 @@ public class NoteDbHelper extends SQLiteOpenHelper {
 				+ NoteEntry.TABLE_NAME + "(" + NoteEntry._ID + ") ON DELETE CASCADE"
 				+ ");";
 		
+		final String SQL_CREATE_NOTE_WITH_REMINDER_VIEW = "CREATE VIEW " + ReminderNoteEntry.VIEW_NAME + " AS "
+				+ " SELECT DISTINCT "
+				+ NoteEntry.TABLE_NAME + "." + NoteEntry._ID + ", "
+				+ NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_TITLE + ", "
+				+ NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_NOTE + ", "
+				+ NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_DATE + ", "
+				+ NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_RECYCLE
+				+ " FROM " + NoteEntry.TABLE_NAME + " INNER JOIN " + ReminderEntry.TABLE_NAME
+				+ " ON " + NoteEntry.TABLE_NAME + "." + NoteEntry._ID + " = " + ReminderEntry.TABLE_NAME + "." + ReminderEntry.COLUMN_NOTE_ID + ";";
+		
 		db.execSQL(SQL_CREATE_NOTE_TABLE);
 		db.execSQL(SQL_CREATE_TRIGGER_TO_UPDATE_SEARCH_SUGGEST_ID);
 		db.execSQL(SQL_CREATE_REMINDER_TABLE);
+		db.execSQL(SQL_CREATE_NOTE_WITH_REMINDER_VIEW);
+		
 		Log.d(TAG, "database created, sql is: " + SQL_CREATE_NOTE_TABLE);
 		Log.d(TAG, "created trigger: " + SQL_CREATE_TRIGGER_TO_UPDATE_SEARCH_SUGGEST_ID);
 		

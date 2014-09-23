@@ -1,7 +1,5 @@
 package com.ssynhtn.mypagertabs;
 
-import java.util.Arrays;
-
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;

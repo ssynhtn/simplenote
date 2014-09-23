@@ -10,15 +10,14 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.ssynhtn.mypagertabs.MyUtilities;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteJoinReminder;
 import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
+import com.ssynhtn.mypagertabs.data.NoteContract.ReminderNoteEntry;
 
 public class NoteProvider extends ContentProvider {
 
@@ -30,8 +29,8 @@ public class NoteProvider extends ContentProvider {
 	// code for reminder table
 	public static final int REMINDERS = 3;
 	public static final int SINGLE_REMINDER = 4;
-	// code for note join reminder
-	public static final int NOTE_JOIN_REMINDER = 5;
+	
+	public static final int NOTE_REMINDER_VIEW = 6;
 
 	private static UriMatcher sUriMatcher = initUriMatcher();
 
@@ -47,9 +46,9 @@ public class NoteProvider extends ContentProvider {
 
 		// uri matches for reminder table
 		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_REMINDER, REMINDERS);
-		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_REMINDER + "/#", SINGLE_REMINDER);
-		// uri matches for note join reminder
-		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_NOTE_JOIN_REMINDER, NOTE_JOIN_REMINDER);
+		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_REMINDER + "/#", SINGLE_REMINDER);		
+		
+		matcher.addURI(NoteContract.CONTENT_AUTHORITY, NoteContract.PATH_REMINDER_NOTE, NOTE_REMINDER_VIEW);
 		return matcher;
 	}
 
@@ -95,6 +94,8 @@ public class NoteProvider extends ContentProvider {
 		}
 
 		getContext().getContentResolver().notifyChange(uri, null);
+		//test notify reminder_note_view
+		getContext().getContentResolver().notifyChange(ReminderNoteEntry.CONTENT_URI, null);
 		return numDeleted;
 	}
 
@@ -143,6 +144,8 @@ public class NoteProvider extends ContentProvider {
 		}
 
 		getContext().getContentResolver().notifyChange(uri, null);
+		// test: notify the reminder_note_view when notes or reminders are inserted
+		getContext().getContentResolver().notifyChange(ReminderNoteEntry.CONTENT_URI, null);
 		return res;
 	}
 
@@ -212,15 +215,14 @@ public class NoteProvider extends ContentProvider {
 			res = db.query(ReminderEntry.TABLE_NAME, projection, mySelection, selectionArgs, null, null, order);
 			break;
 		}
-		case NOTE_JOIN_REMINDER: {
-			SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
-			builder.setTables(NoteJoinReminder.TABLE_NAME);
-			builder.setProjectionMap(NoteJoinReminder.COLUMN_MAP);
-			// default group by ReminderEntry.COLUMN_NOTE_ID "note_id" to force result cursor containing only 
-			// one row for each note
-			res = builder.query(db, projection, selection, selectionArgs, ReminderEntry.COLUMN_NOTE_ID, null, order);
+		
+		case NOTE_REMINDER_VIEW: {
+			Log.d(TAG, "querying for note reminder view");
+			res = db.query(ReminderNoteEntry.VIEW_NAME, projection, selection, selectionArgs, null, null, order);
+
 			break;
 		}
+		
 		default: {
 			Log.d(TAG, "some how no type match!");
 			break;
@@ -282,6 +284,7 @@ public class NoteProvider extends ContentProvider {
 		}
 
 		getContext().getContentResolver().notifyChange(uri, null);
+		getContext().getContentResolver().notifyChange(ReminderNoteEntry.CONTENT_URI, null);
 		return numModified;
 	}
 

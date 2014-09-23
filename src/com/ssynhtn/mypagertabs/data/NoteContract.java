@@ -1,8 +1,5 @@
 package com.ssynhtn.mypagertabs.data;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.SearchManager;
 import android.content.ContentUris;
 import android.net.Uri;
@@ -16,9 +13,7 @@ public class NoteContract {
 	
 	// reminder path
 	public static final String PATH_REMINDER = "reminder";
-
-	// note join reminder path
-	public static final String PATH_NOTE_JOIN_REMINDER = "note_join_reminder";
+	public static final String PATH_REMINDER_NOTE = "reminder_note";
 	
 	public static class NoteEntry implements BaseColumns {
 		public static final String TABLE_NAME = "note";
@@ -66,27 +61,11 @@ public class NoteContract {
 		}
 	}
 	
-	public static class NoteJoinReminder {
-		// join table
-		public static final String TABLE_NAME = NoteEntry.TABLE_NAME + " INNER JOIN " + ReminderEntry.TABLE_NAME + " ON "
-				+ NoteEntry.TABLE_NAME + "." + NoteEntry._ID + " = "
-				+ ReminderEntry.TABLE_NAME + "." + ReminderEntry.COLUMN_NOTE_ID;
-		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_NOTE_JOIN_REMINDER).build();
-		
-		public static final Map<String, String> COLUMN_MAP = initColumnMap();
-		
-		private static final Map<String, String> initColumnMap(){
-			Map<String, String> map = new HashMap<String, String>();
-			map.put(ReminderEntry._ID, ReminderEntry.TABLE_NAME + "." + ReminderEntry._ID);
-			map.put(ReminderEntry.COLUMN_REMINDER_TIME, ReminderEntry.TABLE_NAME + "." + ReminderEntry.COLUMN_REMINDER_TIME);
-			map.put(ReminderEntry.COLUMN_NOTE_ID, ReminderEntry.TABLE_NAME + "." + ReminderEntry.COLUMN_NOTE_ID);
-			map.put(NoteEntry.COLUMN_TITLE, NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_TITLE);
-			map.put(NoteEntry.COLUMN_NOTE, NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_NOTE);
-			map.put(NoteEntry.COLUMN_DATE, NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_DATE);
-			map.put(NoteEntry.COLUMN_RECYCLE, NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_RECYCLE);
-			
-			return map;
-		}
+	// note with reminder view
+	public static class ReminderNoteEntry {
+		public static final String VIEW_NAME = "reminder_note";
+		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_REMINDER_NOTE).build();
 	}
+	
 
 }

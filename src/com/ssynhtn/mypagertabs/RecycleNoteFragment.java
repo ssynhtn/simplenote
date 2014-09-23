@@ -55,12 +55,6 @@ public class RecycleNoteFragment extends BaseNoteFragment {
 	public void onLoadFinished(Loader<Cursor> arg0, Cursor cursor) {
 		Log.d(TAG, "cursor loading finished, about to swap cursor of adapter");
 		adapter.swapCursor(cursor);
-//		try{
-//			
-//		}catch(Exception e){
-//			Log.d(TAG, "excepiton: " + e);
-//		}
-//		
 	}
 
 	@Override
@@ -69,18 +63,6 @@ public class RecycleNoteFragment extends BaseNoteFragment {
 		
 	}
 	
-/*	// permanent delete from database
-	@Override
-	protected int putToRecycleOrPermanentDelete(String title, String note,
-			String date) {
-		ContentResolver resolver = getActivity().getContentResolver();
-		
-		int deleted = resolver.delete(NoteEntry.CONTENT_URI, 
-		NoteEntry.COLUMN_TITLE + " = ? and " + NoteEntry.COLUMN_NOTE + " = ? and " + NoteEntry.COLUMN_DATE + " = ?",
-		new String[]{title, note, date});
-		
-		return deleted;
-	}*/
 
 	@Override
 	protected int putToRecycleOrPermanentDelete(long id) {

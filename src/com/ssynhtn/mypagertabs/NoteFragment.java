@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -63,18 +64,30 @@ public class NoteFragment extends BaseNoteFragment {
 		adapter.swapCursor(null);
 		
 	}
+//
+//	@Override
+//	protected int putToRecycleOrPermanentDelete(String title, String note,
+//			String date) {
+//		ContentResolver resolver = getActivity().getContentResolver();
+//		ContentValues values = new ContentValues();
+//		values.put(NoteEntry.COLUMN_RECYCLE, 1);
+//		
+//		String selection = NoteEntry.COLUMN_TITLE + " = ? and " + NoteEntry.COLUMN_NOTE + " = ? and " + NoteEntry.COLUMN_DATE + " = ? ";
+//		String[] selectionArgs = new String[]{title, note, date};
+//		int numToRecycle = resolver.update(NoteEntry.CONTENT_URI, values, selection, selectionArgs);
+//		return numToRecycle;
+//	}
 
 	@Override
-	protected int putToRecycleOrPermanentDelete(String title, String note,
-			String date) {
+	protected int putToRecycleOrPermanentDelete(long id) {
+		// TODO Auto-generated method stub
 		ContentResolver resolver = getActivity().getContentResolver();
-		ContentValues values = new ContentValues();
+		ContentValues values = new ContentValues(1);
 		values.put(NoteEntry.COLUMN_RECYCLE, 1);
 		
-		String selection = NoteEntry.COLUMN_TITLE + " = ? and " + NoteEntry.COLUMN_NOTE + " = ? and " + NoteEntry.COLUMN_DATE + " = ? ";
-		String[] selectionArgs = new String[]{title, note, date};
-		int numToRecycle = resolver.update(NoteEntry.CONTENT_URI, values, selection, selectionArgs);
-		return numToRecycle;
+		Uri uriWithId = NoteEntry.buildSingleNoteUri(id);
+		int numUpdated = resolver.update(uriWithId, values, null, null);
+		return numUpdated;
 	}
 
 }

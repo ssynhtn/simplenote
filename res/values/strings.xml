@@ -24,6 +24,7 @@
 
     <!-- NoteDetailFragment action buttons -->
     <string name="action_share_note">Share</string>
+    <string name="action_reminder">Reminder</string>
 
     <!-- ActionBar action_search -->
     <string name="action_search_hint">Search Your Notes</string>

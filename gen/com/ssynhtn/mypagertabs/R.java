@@ -1098,14 +1098,15 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f070023;
         public static final int action_bar_title=0x7f070022;
         public static final int action_context_bar=0x7f07001d;
-        public static final int action_copy=0x7f07004e;
-        public static final int action_delete=0x7f07004a;
+        public static final int action_copy=0x7f07004f;
+        public static final int action_delete=0x7f07004b;
         public static final int action_menu_divider=0x7f070016;
         public static final int action_menu_presenter=0x7f070017;
         public static final int action_mode_close_button=0x7f070024;
-        public static final int action_search=0x7f07004c;
-        public static final int action_settings=0x7f07004d;
-        public static final int action_share=0x7f07004b;
+        public static final int action_reminder=0x7f07004a;
+        public static final int action_search=0x7f07004d;
+        public static final int action_settings=0x7f07004e;
+        public static final int action_share=0x7f07004c;
         public static final int activity_chooser_view_content=0x7f070025;
         public static final int always=0x7f07000b;
         public static final int beginning=0x7f070011;
@@ -1289,10 +1290,11 @@ containing a value of this type.
         /**  NoteFragment ActionMode action buttons 
          */
         public static final int action_mode_delete=0x7f0b0017;
+        public static final int action_reminder=0x7f0b001a;
         /**  ActionBar action_search 
          */
-        public static final int action_search_hint=0x7f0b001a;
-        public static final int action_search_title=0x7f0b001b;
+        public static final int action_search_hint=0x7f0b001b;
+        public static final int action_search_title=0x7f0b001c;
         public static final int action_settings=0x7f0b000f;
         /**  NoteDetailFragment action buttons 
          */
@@ -1306,7 +1308,7 @@ containing a value of this type.
         public static final int recycle_note_title=0x7f0b0012;
         public static final int title_activity_new_note=0x7f0b0016;
         public static final int title_activity_note_detail=0x7f0b0014;
-        public static final int title_activity_search_result=0x7f0b001c;
+        public static final int title_activity_search_result=0x7f0b001d;
     }
     public static final class style {
         /** 

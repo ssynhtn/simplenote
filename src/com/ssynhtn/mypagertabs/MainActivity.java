@@ -32,6 +32,7 @@ import android.widget.SearchView;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 import com.ssynhtn.mypagertabs.BaseNoteFragment.OnItemClickCallback;
+import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 
 
 public class MainActivity extends ActionBarActivity implements OnPageChangeListener, OnItemClickCallback {
@@ -273,9 +274,10 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 	// this main activity has a fragment that contains the note list, when one note 
 	// is clicked, would call this
 	@Override
-	public void onItemClick(NoteItem note) {
+	public void onItemClick(long id) {
 		Intent intent = new Intent(this, NoteDetailActivity.class);
-		intent.putExtra(NoteDetailFragment.EXTRA_NOTE, note.getNote());
+		Uri data = NoteEntry.buildSingleNoteUri(id);
+		intent.setData(data);
 		startActivity(intent);
 		
 	}

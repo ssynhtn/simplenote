@@ -29,11 +29,13 @@ public class NoteDetailActivity extends ActionBarActivity implements OnDeleteNot
 		// TODO Auto-generated method stub
 		if(intent.getData() != null){
 			return NoteDetailFragment.newInstance(intent.getData());
-		}else if(intent.hasExtra(NoteDetailFragment.EXTRA_NOTE)){
-			String note = intent.getStringExtra(NoteDetailFragment.EXTRA_NOTE);
-			return NoteDetailFragment.newInstance(note, note, note);
-		}else {
-			Log.d(TAG, "bad intent: " + intent);
+		}
+//		else if(intent.hasExtra(NoteDetailFragment.EXTRA_NOTE)){
+//			String note = intent.getStringExtra(NoteDetailFragment.EXTRA_NOTE);
+//			return NoteDetailFragment.newInstance(note, note, note);
+//		}
+		else {
+			Log.w(TAG, "bad intent: " + intent);
 			return null;
 		}
 		

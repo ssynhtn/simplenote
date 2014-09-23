@@ -3,6 +3,7 @@ package com.ssynhtn.mypagertabs;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -68,7 +69,7 @@ public class RecycleNoteFragment extends BaseNoteFragment {
 		
 	}
 	
-	// permanent delete from database
+/*	// permanent delete from database
 	@Override
 	protected int putToRecycleOrPermanentDelete(String title, String note,
 			String date) {
@@ -78,6 +79,16 @@ public class RecycleNoteFragment extends BaseNoteFragment {
 		NoteEntry.COLUMN_TITLE + " = ? and " + NoteEntry.COLUMN_NOTE + " = ? and " + NoteEntry.COLUMN_DATE + " = ?",
 		new String[]{title, note, date});
 		
+		return deleted;
+	}*/
+
+	@Override
+	protected int putToRecycleOrPermanentDelete(long id) {
+		ContentResolver resolver = getActivity().getContentResolver();
+
+		Uri uriWithId = NoteEntry.buildSingleNoteUri(id);
+		int deleted = resolver.delete(uriWithId, null, null);
+
 		return deleted;
 	}
 

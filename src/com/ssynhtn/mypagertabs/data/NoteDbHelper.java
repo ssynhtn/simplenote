@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
+import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
 
 public class NoteDbHelper extends SQLiteOpenHelper {
 	private static final String TAG = NoteDbHelper.class.getSimpleName();
@@ -13,8 +14,8 @@ public class NoteDbHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "notes.db";
 	
 	// add trigger and search_suggest_id column
-	private static final int OLD_DATABASE_VERSION = 3;
-	private static final int DATABASE_VERSION = 4;
+	private static final int OLD_DATABASE_VERSION = 5;
+	private static final int DATABASE_VERSION = 6;
 
 	public NoteDbHelper(Context context,
 			int version) {
@@ -30,7 +31,7 @@ public class NoteDbHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// SQLite doesn't have a boolean date type, integer 0 for false, others for true
 		final String SQL_CREATE_NOTE_TABLE  = "CREATE TABLE " + NoteEntry.TABLE_NAME + "("
-				+ NoteEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ NoteEntry._ID + " INTEGER PRIMARY KEY, "
 				+ NoteEntry.COLUMN_TITLE + " TEXT, "
 				+ NoteEntry.COLUMN_NOTE + " TEXT, "
 				+ NoteEntry.COLUMN_DATE + " TEXT, "
@@ -47,8 +48,17 @@ public class NoteDbHelper extends SQLiteOpenHelper {
 				+ " = " + NoteEntry._ID + " WHERE "
 				+ NoteEntry._ID + " = new." + NoteEntry._ID + "; END;";
 		
+		final String SQL_CREATE_REMINDER_TABLE = "CREATE TABLE " + ReminderEntry.TABLE_NAME + "("
+				+ ReminderEntry._ID + " INTEGER PRIMARY KEY, "
+				+ ReminderEntry.COLUMN_NOTE_ID + " INTEGER NOT NULL, "
+				+ ReminderEntry.COLUMN_REMINDER_TIME + " TEXT, "
+				+ "FOREIGN KEY(" + ReminderEntry.COLUMN_NOTE_ID + ")" + " REFERENCES "
+				+ NoteEntry.TABLE_NAME + "(" + NoteEntry._ID + ") ON DELETE CASCADE"
+				+ ");";
+		
 		db.execSQL(SQL_CREATE_NOTE_TABLE);
 		db.execSQL(SQL_CREATE_TRIGGER_TO_UPDATE_SEARCH_SUGGEST_ID);
+		db.execSQL(SQL_CREATE_REMINDER_TABLE);
 		Log.d(TAG, "database created, sql is: " + SQL_CREATE_NOTE_TABLE);
 		Log.d(TAG, "created trigger: " + SQL_CREATE_TRIGGER_TO_UPDATE_SEARCH_SUGGEST_ID);
 		
@@ -71,6 +81,8 @@ public class NoteDbHelper extends SQLiteOpenHelper {
 //		}
 		
 		// trigger is automatically dropped with the note table
+		// first drop reminder and then note table
+		db.execSQL("DROP TABLE IF EXISTS " + ReminderEntry.TABLE_NAME + ";");
 		db.execSQL("DROP TABLE IF EXISTS " + NoteEntry.TABLE_NAME + ";");
 		onCreate(db);
 		

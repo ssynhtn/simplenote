@@ -1,7 +1,8 @@
 package com.ssynhtn.mypagertabs;
 
+import java.util.Arrays;
+
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,10 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 
@@ -38,7 +39,8 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 	protected OnItemClickCallback mCallback;
 
 	public static interface OnItemClickCallback {
-		void onItemClick(NoteItem note);
+		// id the note item id
+		void onItemClick(long id);
 	}
 
 	@Override
@@ -64,7 +66,7 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 		try{
 			mCallback = (OnItemClickCallback) activity;
 		}catch(ClassCastException e){
-			Log.d(TAG, "Activity " + activity + " must implement OnItemClickCallback interface!");
+			Log.w(TAG, "Activity " + activity + " must implement OnItemClickCallback interface!");
 		}
 	}
 
@@ -89,16 +91,7 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long id) {
-				Cursor cursor = adapter.getCursor();
-				if(cursor.moveToPosition(position)){
-					String title = cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_TITLE));
-					String note = cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_NOTE));
-					String date = cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_DATE));
-					NoteItem item = new NoteItem(title, note, date);
-					mCallback.onItemClick(item);
-				}else {
-					Log.d(TAG, "strange...");
-				}
+				mCallback.onItemClick(id);
 
 			}
 		});
@@ -185,30 +178,44 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 	private void deleteSelectedItems(){
 		int numDeleted = 0;
 
-		SparseBooleanArray list = listView.getCheckedItemPositions();
-		for(int i = 0; i < list.size(); i ++){
-			boolean checked = list.valueAt(i);
-			if(checked){
-				int index = list.keyAt(i);
-				View itemView = listView.getChildAt(index);
-				TextView titleView = (TextView ) itemView.findViewById(R.id.note_title_textview);
-				TextView noteView = (TextView) itemView.findViewById(R.id.note_textview);
-				TextView dateView = (TextView) itemView.findViewById(R.id.note_date_textview);
-
-				String title = titleView.getText().toString();
-				String note = noteView.getText().toString();
-				String date = dateView.getText().toString();
-				
-				int deleted = putToRecycleOrPermanentDelete(title, note, date);
-				if(deleted > 0){
-					numDeleted += deleted;
-				}
-			}
+		// this was based on title, note and date to delete items, now 
+		// I want to use ids
+		long[] checkedIds = listView.getCheckedItemIds();
+		for(int i = 0; i < checkedIds.length; i++){
+			Log.d(TAG, "checked id: " + checkedIds[i]);
 		}
+		
+		for(int i = 0; i < checkedIds.length; i++){
+			long id = checkedIds[i];
+			putToRecycleOrPermanentDelete(id);
+		}
+		
+		numDeleted = checkedIds.length;
+//		SparseBooleanArray list = listView.getCheckedItemPositions();
+//		for(int i = 0; i < list.size(); i ++){
+//			boolean checked = list.valueAt(i);
+//			if(checked){
+//				int index = list.keyAt(i);
+//				View itemView = listView.getChildAt(index);
+//				TextView titleView = (TextView ) itemView.findViewById(R.id.note_title_textview);
+//				TextView noteView = (TextView) itemView.findViewById(R.id.note_textview);
+//				TextView dateView = (TextView) itemView.findViewById(R.id.note_date_textview);
+//
+//				String title = titleView.getText().toString();
+//				String note = noteView.getText().toString();
+//				String date = dateView.getText().toString();
+//				
+//				int deleted = putToRecycleOrPermanentDelete(title, note, date);
+//				if(deleted > 0){
+//					numDeleted += deleted;
+//				}
+//			}
+//		}
 
 		Toast.makeText(getActivity(), "Deleted: " + numDeleted, Toast.LENGTH_SHORT).show();
 	}
 	
-	protected abstract int putToRecycleOrPermanentDelete(String title, String note, String date);
+//	protected abstract int putToRecycleOrPermanentDelete(String title, String note, String date);
+	protected abstract int putToRecycleOrPermanentDelete(long id);
 
 }

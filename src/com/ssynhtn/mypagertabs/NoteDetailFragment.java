@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -22,7 +21,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +34,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ssynhtn.mypagertabs.NewReminderDialogFragment.OnNewReminderListener;
 import com.ssynhtn.mypagertabs.TwoPickersDialogFragment.OnTimeSetCallback;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
@@ -130,7 +127,12 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 				
 				// create alarm for this reminder
 				Intent intent = new Intent(getActivity(), ReminderReceiver.class);
-				intent.setData(uri);
+				// this intent will be delivered to onReceive
+				// and it's data will be used to create an intent to open a NoteDetailActivity
+				// so use mNoteItemUri, rather than uri(for reminder stuff)
+				// if I later want to show reminder stuff on notification
+				// I can pass reminder strings as extra in this mNoteItemUri
+				intent.setData(mNoteItemUri);
 				PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
 				alarmManager.set(AlarmManager.RTC_WAKEUP, timeMillis, pi);
 				

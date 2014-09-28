@@ -57,11 +57,14 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        initialSetup();
+        
         handleIntent(getIntent());
         
     }
 
 	private void initialSetup() {
+		Log.d(TAG, "initial setup");
 		mViewPager = (ViewPager) findViewById(R.id.viewpager);
         
         mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -81,6 +84,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 	}
 
     private void handleIntent(Intent intent){
+    	
     	String action = intent.getAction();
     	if(Intent.ACTION_SEARCH.equals(action)){
     		String query = intent.getStringExtra(SearchManager.QUERY);
@@ -88,9 +92,12 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
     	}else if(Intent.ACTION_VIEW.equals(action)){
     		Uri data = intent.getData();
     		viewData(data);
-    	} else {
-    		initialSetup();
     	}
+    	
+    	// this is moved into oncreate, and if onnewintent, this won't be called
+//    	else {
+//    		initialSetup();
+//    	}
     }
     
     

@@ -22,7 +22,10 @@ public class ReminderReceiver extends BroadcastReceiver {
 		builder.setSmallIcon(R.drawable.ic_launcher);
 		builder.setDefaults(Notification.DEFAULT_SOUND);
 		builder.setAutoCancel(true);
-		builder.setContentIntent(PendingIntent.getActivity(context, 0, new Intent(), 0));
+		// create intent to open NoteDetailActivity for this note
+		Intent noteIntent = new Intent(context, NoteDetailActivity.class);
+		noteIntent.setData(intent.getData());
+		builder.setContentIntent(PendingIntent.getActivity(context, 0, noteIntent, 0));
 		Notification notification = builder.build();
 		
 		NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

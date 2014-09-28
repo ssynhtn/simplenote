@@ -1,5 +1,6 @@
 package com.ssynhtn.mypagertabs;
 
+import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -113,7 +114,13 @@ public class NewNoteActivity extends ActionBarActivity {
 		
 		int recycle = item.isRecycle() ? 1 : 0;
 		values.put(NoteEntry.COLUMN_RECYCLE, recycle);
-		resolver.insert(NoteEntry.CONTENT_URI, values);
+		
+		
+//		resolver.insert(NoteEntry.CONTENT_URI, values);
+		// test using asyncqueryhandler
+		AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) {};
+		handler.startInsert(0, null, NoteEntry.CONTENT_URI, values);
+		
 	}
 	
 	// let back button as save too!

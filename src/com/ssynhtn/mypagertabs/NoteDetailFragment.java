@@ -3,18 +3,26 @@ package com.ssynhtn.mypagertabs;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,14 +31,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ssynhtn.mypagertabs.NewReminderDialogFragment.OnNewReminderListener;
+import com.ssynhtn.mypagertabs.TwoPickersDialogFragment.OnTimeSetCallback;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
 
 
-public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Cursor>{
+public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Cursor>, OnTimeSetCallback {
 	
 	public static final String TAG = NoteDetailFragment.class.getSimpleName();
 	
@@ -40,8 +52,14 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 
 	private static final String EXTRA_NOTE_URI = "extra_note_entry";
 	
+	private static final int REMINDER_LOADER_ID = 1;
+	private static final int NOTE_LOADER_ID = 2;
+	
 	private TextView mNoteView;
 	private Uri mNoteItemUri;
+	
+	private ListView mRemindersListView;
+	private CursorAdapter mRemindersAdapter;
 	
 	// note data to be loaded
 	private String mTitle;
@@ -87,10 +105,6 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 			deleteCurrentNote();
 			return true;
 		}
-		else if(id == R.id.action_reminder){
-			addOrRemoveReminder();
-			return true;
-		}
 //		else if(id == R.id.action_share){
 //			ShareActionProvider provider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 //			provider.setShareIntent(makeShareIntent());
@@ -99,32 +113,69 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 		return super.onOptionsItemSelected(item);
 	}
 	
+
+	private void createReminder(final long timeMillis){
+		ContentResolver resolver = getActivity().getContentResolver();
+		final AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+
+		long id = ContentUris.parseId(mNoteItemUri);
+		
+		ContentValues values = new ContentValues();
+		values.put(ReminderEntry.COLUMN_NOTE_ID, id);
+		values.put(ReminderEntry.COLUMN_REMINDER_TIME, timeMillis);
+		AsyncQueryHandler handler = new AsyncQueryHandler(resolver) {
+			@Override
+			protected void onInsertComplete(int token, Object cookie, Uri uri) {
+				String logText = "created reminder";
+				
+				// create alarm for this reminder
+				Intent intent = new Intent(getActivity(), ReminderReceiver.class);
+				intent.setData(uri);
+				PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+				alarmManager.set(AlarmManager.RTC_WAKEUP, timeMillis, pi);
+				
+				Log.d(TAG, logText);
+				Toast.makeText(getActivity(), logText, Toast.LENGTH_SHORT).show();
+			}
+		};
+		handler.startInsert(0, null, ReminderEntry.CONTENT_URI, values);
+	}
+	
+	private void createReminder(){
+		final long timeMillis = System.currentTimeMillis() + 10 * 1000; 	// 10 seconds later
+		createReminder(timeMillis);
+		
+	}
+	
 	private void addOrRemoveReminder() {
 		// TODO Auto-generated method stub
 		ContentResolver resolver = getActivity().getContentResolver();
+		
+		AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 		
 		long id = ContentUris.parseId(mNoteItemUri);
 		String selection = ReminderEntry.COLUMN_NOTE_ID + " = " + id;
 		Cursor cursor = resolver.query(ReminderEntry.CONTENT_URI, null, selection, null, null);
 		if(cursor != null && cursor.getCount() > 0){
+			// before removing all the reminders, get their ids and remove the real remiders(notifications) first
+			int idIndex = cursor.getColumnIndex(ReminderEntry._ID);
+			while(cursor.moveToNext()){
+				long reminderId = cursor.getLong(idIndex);
+				Uri reminderUri = ContentUris.withAppendedId(ReminderEntry.CONTENT_URI, reminderId);
+				Intent intent = new Intent(getActivity(), ReminderReceiver.class);
+				intent.setData(reminderUri);
+				PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+				alarmManager.cancel(pi);				
+			}
+			
 			// have to remove all reminders pointing to this note
 			int numDeleted = resolver.delete(ReminderEntry.CONTENT_URI, selection, null);
 			String logText = "deleted " + numDeleted + " reminders";
 			
-			Log.d(TAG,logText);
-			Toast.makeText(getActivity(), logText, Toast.LENGTH_SHORT).show();
-		}else {
-			// add a reminder with current time
-			Calendar cal = Calendar.getInstance();
-			long timeMills = cal.getTimeInMillis();
-			ContentValues values = new ContentValues();
-			values.put(ReminderEntry.COLUMN_NOTE_ID, id);
-			values.put(ReminderEntry.COLUMN_REMINDER_TIME, timeMills);
-			Uri res = resolver.insert(ReminderEntry.CONTENT_URI, values);
-			String logText = "created reminder, res uri: " + res;
-			
 			Log.d(TAG, logText);
 			Toast.makeText(getActivity(), logText, Toast.LENGTH_SHORT).show();
+		}else {
+			createReminder();
 		}
 		
 	}
@@ -171,16 +222,17 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 		return fragment;
 	}
 	
-//	public static NoteDetailFragment newInstance(String title, String note, String date){
-//		Bundle args = new Bundle();
-//		args.putString(EXTRA_NOTE, note);
-//		args.putString(EXTRA_TITLE, title);
-//		args.putString(EXTRA_DATE, date);
-//		
-//		NoteDetailFragment fragment = new NoteDetailFragment();
-//		fragment.setArguments(args);
-//		return fragment;
-//	}
+	private void showNewReminderDialog(){
+		// now don't use NewReminderDialog, but TwoPickersDialog to directly show two pickers 
+		// in one dialog
+//		DialogFragment fragment = new NewReminderDialogFragment();
+//		FragmentManager fm = getFragmentManager();
+//		fragment.show(fm, null);
+		
+		TwoPickersDialogFragment fragment = TwoPickersDialogFragment.newInstance(this);
+		FragmentManager fm = getFragmentManager();
+		fragment.show(fm, null);
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -198,15 +250,30 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 		View rootView = inflater.inflate(R.layout.fragment_note_detail,
 				container, false);
 		
-		mNoteView = (TextView) rootView.findViewById(R.id.note_textview);
-//		String note = getArguments().getString(EXTRA_NOTE);
-//		noteView.setText(note);
+		mNoteView = (TextView) rootView.findViewById(R.id.note_text);
+		mRemindersListView = (ListView) rootView.findViewById(R.id.list_reminders);
 		
+		String[] from = {ReminderEntry.COLUMN_REMINDER_TIME};
+		int[] to = {R.id.reminder_textview};
+//		mRemindersAdapter = new SimpleCursorAdapter(getActivity(), R.layout.single_reminder_item_view, null, from, to, 0);
+		mRemindersAdapter = new ReminderCursorAdapter(getActivity(), null, 0);
+		mRemindersListView.setAdapter(mRemindersAdapter);
+
+		Button createReminderButton = (Button) rootView.findViewById(R.id.button_add_reminder);
+		createReminderButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				showNewReminderDialog();
+				
+			}
+		});
 		Bundle args = getArguments();
 		if(args.containsKey(EXTRA_NOTE_URI)){
 			mNoteItemUri = args.getParcelable(EXTRA_NOTE_URI);
-			getLoaderManager().initLoader(0, null, this);	// this returns v4 LoaderManager
-//			getActivity().getLoaderManager().initLoader(0, null, this);
+			getLoaderManager().initLoader(NOTE_LOADER_ID, null, this);	// this returns v4 LoaderManager
+			
+			getLoaderManager().initLoader(REMINDER_LOADER_ID, null, this);
 		}
 //		else{
 //			String title = args.getString(EXTRA_TITLE);
@@ -220,33 +287,70 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		Log.d(TAG, "loading for note item uri: " + mNoteItemUri);
-		return new CursorLoader(getActivity(), mNoteItemUri, null, null, null, null);
-	}
-
-	@Override
-	public void onLoadFinished(Loader<Cursor> arg0, Cursor data) {
-		// TODO Auto-generated method stub
-		if(data != null){
-			if(data.moveToFirst()){
-				mTitle = data.getString(data.getColumnIndex(NoteEntry.COLUMN_TITLE));
-				mNote = data.getString(data.getColumnIndex(NoteEntry.COLUMN_NOTE));
-				mDate = data.getString(data.getColumnIndex(NoteEntry.COLUMN_DATE));
-				
-				mNoteView.setText(mTitle + "\n" + mNote + "\n" + mDate);
-				
-			} else {
-				Log.d(TAG, "data has zero rows");
-			}
-		}else{
-			Log.d(TAG, "no note data!!, data is " + data);
+		switch(id){
+		case NOTE_LOADER_ID: {
+			Log.d(TAG, "loading for note item uri: " + mNoteItemUri);
+			return new CursorLoader(getActivity(), mNoteItemUri, null, null, null, null);			
+		}
+		
+		case REMINDER_LOADER_ID: {
+			long noteId = ContentUris.parseId(mNoteItemUri);
+			String selection = ReminderEntry.COLUMN_NOTE_ID + " = " + noteId;
+			return new CursorLoader(getActivity(), ReminderEntry.CONTENT_URI, null, selection, null, null);
+		}
+		default: {
+			throw new IllegalArgumentException("unexpected id: " + id);
+		}
 		}
 	}
 
 	@Override
-	public void onLoaderReset(Loader<Cursor> arg0) {
+	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		// TODO Auto-generated method stub
 		
+		long id = loader.getId();
+		if(id == NOTE_LOADER_ID){
+			if(data != null){
+				if(data.moveToFirst()){
+					mTitle = data.getString(data.getColumnIndex(NoteEntry.COLUMN_TITLE));
+					mNote = data.getString(data.getColumnIndex(NoteEntry.COLUMN_NOTE));
+					mDate = data.getString(data.getColumnIndex(NoteEntry.COLUMN_DATE));
+					
+					mNoteView.setText(mTitle + "\n" + mNote + "\n" + mDate);
+					
+				} else {
+					Log.d(TAG, "data has zero rows");
+				}
+			}else{
+				Log.d(TAG, "no note data!!, data is " + data);
+			}
+		}else if(id == REMINDER_LOADER_ID){
+			mRemindersAdapter.swapCursor(data);
+		}else{
+			throw new IllegalArgumentException("unexpected loader id: " + id);
+		}
+		
 	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) {
+		// TODO Auto-generated method stub
+		long id = loader.getId();
+		if(id == NOTE_LOADER_ID){
+			mNoteView.setText("loader reset");
+		}else if(id == REMINDER_LOADER_ID){
+			mRemindersAdapter.swapCursor(null);
+		}
+	}
+
+
+	@Override
+	public void onTimeSet(int year, int month, int day, int hour, int minute) {
+		// TODO Auto-generated method stub
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month, day, hour, minute);
+		createReminder(cal.getTimeInMillis());
+	}
+	
 	
 }

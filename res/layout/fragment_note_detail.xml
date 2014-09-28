@@ -9,9 +9,35 @@
     tools:context="com.ssynhtn.mypagertabs.NoteDetailFragment" >
 
     <TextView
-        android:id="@+id/note_textview"
+        android:id="@+id/note_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:text="@string/hello_world" />
+
+    <TextView
+        android:id="@+id/note_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/note_title"
+        android:layout_below="@+id/note_title"
+        android:text="@string/hello_world" />
+
+    <Button
+        android:id="@+id/button_add_reminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/note_title"
+        android:layout_below="@id/note_text"
+        android:text="Add Reminder" />
+
+    <ListView
+        android:id="@+id/list_reminders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_add_reminder"
+        android:layout_alignParentLeft="true" >
+    </ListView>
 
 </RelativeLayout>

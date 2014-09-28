@@ -14,7 +14,7 @@ public class NoteDbHelper extends SQLiteOpenHelper {
 	
 	private static final String DATABASE_NAME = "notes.db";
 	
-	private static final int DATABASE_VERSION = 7;
+	private static final int DATABASE_VERSION = 1;
 
 	public NoteDbHelper(Context context,
 			int version) {
@@ -64,6 +64,7 @@ public class NoteDbHelper extends SQLiteOpenHelper {
 				+ NoteEntry.TABLE_NAME + "." + NoteEntry.COLUMN_RECYCLE
 				+ " FROM " + NoteEntry.TABLE_NAME + " INNER JOIN " + ReminderEntry.TABLE_NAME
 				+ " ON " + NoteEntry.TABLE_NAME + "." + NoteEntry._ID + " = " + ReminderEntry.TABLE_NAME + "." + ReminderEntry.COLUMN_NOTE_ID + ";";
+	
 		
 		db.execSQL(SQL_CREATE_NOTE_TABLE);
 		db.execSQL(SQL_CREATE_TRIGGER_TO_UPDATE_SEARCH_SUGGEST_ID);
@@ -95,8 +96,21 @@ public class NoteDbHelper extends SQLiteOpenHelper {
 		// first drop reminder and then note table
 		db.execSQL("DROP TABLE IF EXISTS " + ReminderEntry.TABLE_NAME + ";");
 		db.execSQL("DROP TABLE IF EXISTS " + NoteEntry.TABLE_NAME + ";");
+		db.execSQL("DROP VIEW IF EXISTS " + ReminderNoteEntry.VIEW_NAME + ";");
 		onCreate(db);
 		
+	}
+	
+	@Override
+	public void onOpen(SQLiteDatabase db) {
+		// TODO Auto-generated method stub
+		super.onOpen(db);
+		if(!db.isReadOnly()){
+			// in sqlite you have to specify this to make foreign key happen;
+			// and this has to be called each time the db is opened, it's for this session only
+			final String SQL_PRAGMA_FOREIGN_KEY = "PRAGMA foreign_keys = ON;";
+			db.execSQL(SQL_PRAGMA_FOREIGN_KEY);
+		}
 	}
 	
 	

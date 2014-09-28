@@ -31,7 +31,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".NoteDetailActivity"
+            android:name="com.ssynhtn.mypagertabs.NoteDetailActivity"
             android:label="@string/title_activity_note_detail"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -68,6 +68,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ssynhtn.mypagertabs.MainActivity" />
         </activity>
+        
+        <receiver android:name=".ReminderReceiver" />
     </application>
 
 </manifest>

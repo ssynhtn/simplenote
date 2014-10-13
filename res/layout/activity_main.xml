@@ -7,7 +7,8 @@
     <com.astuetz.viewpager.extensions.PagerSlidingTabStrip
         android:id="@+id/slidingtabs"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="48dp"
+        android:textSize="16sp">
     </com.astuetz.viewpager.extensions.PagerSlidingTabStrip>
 
     <android.support.v4.view.ViewPager
@@ -26,7 +27,8 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <ImageView
             android:layout_width="0dip"

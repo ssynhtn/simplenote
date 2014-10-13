@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.mypagertabs.model;
 
 import java.io.Serializable;
 import java.util.Date;

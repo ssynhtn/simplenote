@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.ssynhtn.mypagertabs.data.NoteContract;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
+import com.ssynhtn.mypagertabs.model.NoteItem;
 import com.ssynhtn.mypagertabs.util.MyUtilities;
 
 public class NewNoteActivity extends ColorActionBarActivity {
@@ -116,7 +117,7 @@ public class NewNoteActivity extends ColorActionBarActivity {
 		Log.d(TAG, "saving result..");
 		String title = mTitleEditText.getText().toString();
 		String text = mEditText.getText().toString();
-		if(text.equals("") && title.equals("")){
+		if(text.equals("") && title.equals("")){	// both title and note are empty
 			if(editNote){	// old note now edited to empty
 				Toast.makeText(this, "deleting empty note", Toast.LENGTH_SHORT).show();
 				deleteNote(noteId);
@@ -165,7 +166,7 @@ public class NewNoteActivity extends ColorActionBarActivity {
 		ContentValues values = new ContentValues();
 		values.put(NoteEntry.COLUMN_TITLE, item.getTitle());
 		values.put(NoteEntry.COLUMN_NOTE, item.getNote());
-		values.put(NoteEntry.COLUMN_DATE, MyUtilities.getSimpleDateString(item.getDate()));
+		values.put(NoteEntry.COLUMN_DATE, item.getDate().getTime());
 		
 		int recycle = item.isRecycle() ? 1 : 0;
 		values.put(NoteEntry.COLUMN_RECYCLE, recycle);
@@ -209,12 +210,8 @@ public class NewNoteActivity extends ColorActionBarActivity {
 			// NavUtils.navigateUpTo(this, this.getParentActivityIntent(this));
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
-		} else if(id == R.id.action_save_note){
-			saveNoteAsResult();
-			finish();
-			return true;
-			
-		} else if(id == R.id.action_cancel_note){
+		}  else if(id == R.id.action_cancel_note){
+			Toast.makeText(this, "Editing canceled", Toast.LENGTH_SHORT).show();
 			finish();
 			return true;
 		}

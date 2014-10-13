@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
-    
-    <item android:id="@+id/action_edit_note"
-        android:title="Edit"
-        app:showAsAction="ifRoom"/>
-    
-    <item android:id="@+id/action_restore"
+
+    <item
+        android:id="@+id/action_restore"
+        android:icon="@drawable/ic_action_undo"
         android:title="@string/action_restore"
         app:showAsAction="ifRoom"/>
-    
-    <item 
+    <item
         android:id="@+id/action_delete"
+        android:icon="@drawable/ic_action_discard"
         android:title="@string/action_mode_delete"
         app:showAsAction="ifRoom"/>
-    
-    <item android:id="@+id/action_share"
+    <item
+        android:id="@+id/action_add_reminder"
+        android:icon="@drawable/ic_action_alarms"
+        android:title="Reminder"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_edit_note"
+        android:icon="@drawable/ic_action_edit"
+        android:title="Edit"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_share"
         android:title="@string/action_share_note"
-        app:showAsAction="ifRoom"
-        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        app:showAsAction="ifRoom"/>
 
 </menu>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">简单记事</string>
+    <string name="action_settings">设置</string>
+
+    <!-- MainActivity note tabs title -->
+    <string name="note_title">全部笔记</string>
+    <string name="private_note_title">包含提醒</string>
+    <string name="recycle_note_title">回收站</string>
+
+    <!-- change color of action bar -->
+    <string name="action_change_color">绿色</string>
+    <string name="title_activity_note_detail">笔记</string>
+
+    <!-- NoteFragment add new note action button -->
+    <string name="action_add_note">新笔记</string>
+    <string name="title_activity_new_note">编辑笔记</string>
+
+    <!-- NoteFragment ActionMode action buttons -->
+    <string name="action_mode_delete">删除</string>
+    <string name="action_mode_copy">复制</string>
+
+    <!-- NoteDetailFragment action buttons -->
+    <string name="action_share_note">分享</string>
+    <string name="action_reminder">提醒</string>
+
+    <!-- ActionBar action_search -->
+    <string name="action_search_hint">搜索全部笔记</string>
+    <string name="action_search_title">搜索</string>
+    <string name="title_activity_search_result">搜索结果</string>
+    
+    <string name="action_restore">恢复</string>
+
+</resources>

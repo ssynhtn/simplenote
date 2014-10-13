@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ssynhtn.mypagertabs.TwoPickersDialogFragment.OnTimeSetCallback;
+import com.ssynhtn.mypagertabs.adapter.ReminderCursorAdapter;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
 
@@ -53,6 +54,7 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 	private static final int REMINDER_LOADER_ID = 1;
 	private static final int NOTE_LOADER_ID = 2;
 	
+	private TextView mTitleView;
 	private TextView mNoteView;
 	private Uri mNoteItemUri;
 	
@@ -121,12 +123,10 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 			intent.putExtra(Intent.EXTRA_SUBJECT, mTitle);
 			startActivity(intent);
 			return true;
+		} else if(id == R.id.action_add_reminder){
+			showNewReminderDialog();
+			return true;
 		}
-//		else if(id == R.id.action_share){
-//			ShareActionProvider provider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-//			provider.setShareIntent(makeShareIntent());
-//			return false;
-//		}
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -287,6 +287,7 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 				container, false);
 		
 		mNoteView = (TextView) rootView.findViewById(R.id.note_text);
+		mTitleView = (TextView) rootView.findViewById(R.id.note_title);
 		mRemindersListView = (ListView) rootView.findViewById(R.id.list_reminders);
 		
 		String[] from = {ReminderEntry.COLUMN_REMINDER_TIME};
@@ -356,7 +357,8 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 					mNote = data.getString(data.getColumnIndex(NoteEntry.COLUMN_NOTE));
 					mDate = data.getString(data.getColumnIndex(NoteEntry.COLUMN_DATE));
 					
-					mNoteView.setText(mTitle + "\n" + mNote + "\n" + mDate);
+					mTitleView.setText(mTitle);
+					mNoteView.setText(mNote);
 					
 				} else {
 					Log.d(TAG, "data has zero rows");

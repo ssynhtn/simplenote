@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MyPagerTabs</string>
+    <string name="app_name">Mere Note</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <!-- MainActivity note tabs title -->
-    <string name="note_title">NOTES</string>
-    <string name="private_note_title">NOTIFICATION NOTES</string>
-    <string name="recycle_note_title">Recycle Notes</string>
+    <string name="note_title">ALL NOTES</string>
+    <string name="private_note_title">REMINDER NOTES</string>
+    <string name="recycle_note_title">RECYCLE BIN</string>
 
     <!-- change color of action bar -->
     <string name="action_change_color">GREEN</string>
-    <string name="title_activity_note_detail">NoteDetailActivity</string>
+    <string name="title_activity_note_detail">Details</string>
 
     <!-- NoteFragment add new note action button -->
     <string name="action_add_note">New Note</string>
-    <string name="title_activity_new_note">NewNoteActivity</string>
+    <string name="title_activity_new_note">Edit Note</string>
 
     <!-- NoteFragment ActionMode action buttons -->
     <string name="action_mode_delete">Delete</string>

@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ssynhtn.mypagertabs.adapter.NoteCursorAdapter;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 
 public abstract class BaseNoteFragment extends Fragment implements LoaderCallbacks<Cursor>{
@@ -35,7 +36,7 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 
 
 	protected ListView listView;
-	protected SimpleCursorAdapter adapter;
+	protected CursorAdapter adapter;
 
 	protected OnItemClickCallback mCallback;
 
@@ -83,7 +84,9 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 		int[] to = {R.id.note_title_textview, R.id.note_textview, R.id.note_date_textview};
 
 		Log.d(TAG, "creating adapter and set list adapter to it");
-		adapter = new SimpleCursorAdapter(getActivity(), R.layout.single_note_item_view, null, from, to, 0);
+//		adapter = new SimpleCursorAdapter(getActivity(), R.layout.single_note_item_view, null, from, to, 0);
+		// switch to note fragment
+		adapter = new NoteCursorAdapter(getActivity(), null, 0);
 
 		listView.setAdapter(adapter);
 

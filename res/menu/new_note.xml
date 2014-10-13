@@ -3,10 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ssynhtn.mypagertabs.NewNoteActivity" >
 
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+    <item android:id="@+id/action_save_note"
+        android:title="Save"
+        app:showAsAction="ifRoom"
+        />
+    
+    <item android:id="@+id/action_cancel_note"
+        android:title="Cancel"
         app:showAsAction="never"/>
 
 </menu>

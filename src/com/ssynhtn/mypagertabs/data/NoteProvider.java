@@ -14,10 +14,10 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.ssynhtn.mypagertabs.MyUtilities;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
 import com.ssynhtn.mypagertabs.data.NoteContract.ReminderNoteEntry;
+import com.ssynhtn.mypagertabs.util.MyUtilities;
 
 public class NoteProvider extends ContentProvider {
 

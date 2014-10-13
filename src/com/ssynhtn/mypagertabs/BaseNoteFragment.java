@@ -1,6 +1,9 @@
 package com.ssynhtn.mypagertabs;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -148,6 +151,7 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 
 			}
 
+			// copy into a single ClipData.Item
 			private void copySelectedItems(){
 				SparseBooleanArray list = listView.getCheckedItemPositions();
 				int size = list.size();
@@ -160,17 +164,28 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 						View itemView = listView.getChildAt(key);
 						TextView textView = (TextView) itemView.findViewById(R.id.note_textview);
 						String text = textView.getText().toString();
+						TextView titleView = (TextView) itemView.findViewById(R.id.note_title_textview);
+						String title = titleView.getText().toString();
 
-						sb.append(text + "|");
+						sb.append(title).append("\n").append(text).append("\n");
 					}
 				}
 
 				String res = sb.toString();
-				Toast.makeText((Activity) mCallback, res, Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "copying " + res + " into clip board");
+				Toast.makeText(getActivity(), "Data copied to clipboard.", Toast.LENGTH_SHORT).show();
+				copyStringToClipboard(res);
 			}
 
 
 		};
+	}
+	
+	private void copyStringToClipboard(String text){
+		ClipboardManager manager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+		
+		ClipData data = ClipData.newPlainText(null, text);
+		manager.setPrimaryClip(data);
 	}
 
 	private void deleteSelectedItems(){

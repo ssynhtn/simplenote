@@ -3,6 +3,8 @@ package com.ssynhtn.mypagertabs;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.ssynhtn.mypagertabs.util.MyUtilities;
+
 public class NoteItem implements Serializable {
 	private static final long serialVersionUID = 2123259915902965935L;
 	private String note;

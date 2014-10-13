@@ -48,6 +48,7 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 //	private static final String EXTRA_DATE = "extra_date";
 
 	private static final String EXTRA_NOTE_URI = "extra_note_entry";
+	public static final String EXTRA_NOTE_RECYCLE = "extra_note_recyle";
 	
 	private static final int REMINDER_LOADER_ID = 1;
 	private static final int NOTE_LOADER_ID = 2;
@@ -62,9 +63,11 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 	private String mTitle;
 	private String mNote;
 	private String mDate;
+	private boolean mRecyle;
 
 	public static interface OnDeleteNoteListener {
 		void onDeleteNote();
+		void onRestoreNote();	// just to be simple
 	}
 	
 	private OnDeleteNoteListener mListener;
@@ -85,6 +88,11 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 		}else{
 			provider.setShareIntent(makeShareIntent());
 		}
+		
+		if(!mRecyle){
+			MenuItem restoreItem = menu.findItem(R.id.action_restore);
+			restoreItem.setVisible(false);
+		}
 	}
 	
 	private Intent makeShareIntent(){
@@ -101,6 +109,10 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 		if(id == R.id.action_delete){
 			deleteCurrentNote();
 			return true;
+		} else if(id == R.id.action_restore){
+			item.setVisible(false);	// note is restored, so no restore is needed
+			mRecyle = false;
+			restoreNote();
 		}
 //		else if(id == R.id.action_share){
 //			ShareActionProvider provider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
@@ -110,6 +122,19 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 		return super.onOptionsItemSelected(item);
 	}
 	
+	// if the current note is a recycle note, restore it
+	private void restoreNote(){
+		AsyncQueryHandler handler = new AsyncQueryHandler(getActivity().getContentResolver()) {
+			@Override
+			protected void onUpdateComplete(int token, Object cookie, int result) {
+				Toast.makeText(getActivity(), "note restored", Toast.LENGTH_SHORT).show();
+				mListener.onRestoreNote();
+			}
+		};
+		ContentValues values = new ContentValues(1);
+		values.put(NoteEntry.COLUMN_RECYCLE, 0);
+		handler.startUpdate(0, null, mNoteItemUri, values, null, null);
+	}
 
 	private void createReminder(final long timeMillis){
 		ContentResolver resolver = getActivity().getContentResolver();
@@ -214,10 +239,11 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 	
 	
 	
-	public static NoteDetailFragment newInstance(Uri noteItemUri){
+	public static NoteDetailFragment newInstance(Uri noteItemUri, boolean recycle){
 		Log.d(TAG, "create note detail fragment with data uri: " + noteItemUri);
 		Bundle args = new Bundle();
 		args.putParcelable(EXTRA_NOTE_URI, noteItemUri);
+		args.putBoolean(EXTRA_NOTE_RECYCLE, recycle);
 		
 		NoteDetailFragment fragment = new NoteDetailFragment();
 		fragment.setArguments(args);
@@ -276,6 +302,10 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 			getLoaderManager().initLoader(NOTE_LOADER_ID, null, this);	// this returns v4 LoaderManager
 			
 			getLoaderManager().initLoader(REMINDER_LOADER_ID, null, this);
+		}
+		
+		if(args.containsKey(EXTRA_NOTE_RECYCLE)){
+			mRecyle = args.getBoolean(EXTRA_NOTE_RECYCLE);
 		}
 //		else{
 //			String title = args.getString(EXTRA_TITLE);

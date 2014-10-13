@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,8 +15,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
+import com.ssynhtn.mypagertabs.util.MyUtilities;
 
-public class NewNoteActivity extends ActionBarActivity {
+public class NewNoteActivity extends ColorActionBarActivity {
 	private static final String TAG = MyUtilities.createTag(NewNoteActivity.class);
 	
 	public static final String RESULT_NOTE_ITEM = "result_note_item";
@@ -33,31 +33,32 @@ public class NewNoteActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setActionBarColor(getResources().getColor(R.color.light_green));
 		setContentView(R.layout.activity_new_note);
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		mEditText = (EditText) findViewById(R.id.new_note_edittext);
 		mTitleEditText = (EditText) findViewById(R.id.new_note_title_edittext);
-		final Button noteButton = (Button) findViewById(R.id.new_note_button);
+//		final Button noteButton = (Button) findViewById(R.id.new_note_button);
 		
-		noteButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				saveNoteAsResult();
-				finish();
-			}
-		});
-		
-		Button cancelButton = (Button) findViewById(R.id.cancel_note_button);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				finish();
-			}
-		});
+//		noteButton.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				saveNoteAsResult();
+//				finish();
+//			}
+//		});
+//		
+//		Button cancelButton = (Button) findViewById(R.id.cancel_note_button);
+//		cancelButton.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				finish();
+//			}
+//		});
 		
 		handleIntent(getIntent());
 	}
@@ -145,10 +146,7 @@ public class NewNoteActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		} 
-		else if(id == android.R.id.home){
+		if(id == android.R.id.home){
 			// if the 'UP' button is pressed
 			saveNoteAsResult();
 //			return super.onOptionsItemSelected(item);
@@ -156,6 +154,14 @@ public class NewNoteActivity extends ActionBarActivity {
 			// this is equivalent to 
 			// NavUtils.navigateUpTo(this, this.getParentActivityIntent(this));
 			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		} else if(id == R.id.action_save_note){
+			saveNoteAsResult();
+			finish();
+			return true;
+			
+		} else if(id == R.id.action_cancel_note){
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

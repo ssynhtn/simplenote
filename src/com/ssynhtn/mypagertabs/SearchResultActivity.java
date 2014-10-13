@@ -1,5 +1,6 @@
 package com.ssynhtn.mypagertabs;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.SearchManager;
@@ -7,6 +8,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
+import com.ssynhtn.mypagertabs.util.MyUtilities;
 
 public class SearchResultActivity extends ListActivity implements LoaderCallbacks<Cursor>{
 
@@ -24,7 +27,7 @@ public class SearchResultActivity extends ListActivity implements LoaderCallback
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		setActionBarColor(getResources().getColor(R.color.light_red));
 		// list activity don't need this
 //		setContentView(R.layout.activity_search_result);
 		
@@ -34,6 +37,14 @@ public class SearchResultActivity extends ListActivity implements LoaderCallback
 		mAdapter = new SimpleCursorAdapter(this, R.layout.single_note_item_view, null, from, to, 0);
 		setListAdapter(mAdapter);
 		getLoaderManager().initLoader(0, null, this);
+	}
+	
+	private void setActionBarColor(int color){
+    	ActionBar actionBar = getActionBar();
+    	
+    	BitmapDrawable singleColor = MyUtilities.makeSingleColorDrawable(this, color);
+    	actionBar.setBackgroundDrawable(singleColor);   
+    	
 	}
 
 	@Override

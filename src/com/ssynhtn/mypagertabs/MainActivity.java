@@ -27,12 +27,14 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 import com.ssynhtn.mypagertabs.BaseNoteFragment.OnItemClickCallback;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
+import com.ssynhtn.mypagertabs.util.MyUtilities;
 
 
 public class MainActivity extends ActionBarActivity implements OnPageChangeListener, OnItemClickCallback {
@@ -50,6 +52,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 	private Fragment mRecycleNoteFragment = new RecycleNoteFragment();
 	
 	private int currentColor;
+	private int currentIndex;	// which fragment is shown currently
 	private Drawable oldActionBarBackground;
 
     @Override
@@ -79,7 +82,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         mTabs.setOnPageChangeListener(this);
         
         Resources res = getResources();
-        currentColor = res.getColor(R.color.light_blue);
+        currentColor = res.getColor(R.color.light_red);
         changeActionBarColor(currentColor);
 	}
 
@@ -146,6 +149,9 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
         searchView.setQueryRefinementEnabled(true);
+        
+        // set ime options to actionSearch
+        searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         return true;
     }
 
@@ -186,9 +192,10 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
     	
     	ActionBar actionBar = getSupportActionBar();
     	
-    	BitmapDrawable singleColor = getSingleColorDrawable(currentColor);
+    	BitmapDrawable singleColor = MyUtilities.makeSingleColorDrawable(this, currentColor);
     	Drawable bottom = res.getDrawable(R.drawable.actionbar_bottom);
-    	LayerDrawable background = new LayerDrawable(new Drawable[]{singleColor, bottom});
+//    	LayerDrawable background = new LayerDrawable(new Drawable[]{singleColor, bottom});
+    	Drawable background = singleColor;
     	
     	if(oldActionBarBackground == null){
     		actionBar.setBackgroundDrawable(background);    		
@@ -200,13 +207,6 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
     	
     	oldActionBarBackground = background;
     	
-    }
-    
-    private BitmapDrawable getSingleColorDrawable(int color){
-    	Bitmap bitmap = Bitmap.createBitmap(1, 1, Config.ARGB_8888);
-    	bitmap.setPixel(0, 0, color);
-    	BitmapDrawable image = new BitmapDrawable(getResources(), bitmap);
-    	return image;
     }
     
     public class MyPagerAdapter extends FragmentPagerAdapter {
@@ -266,11 +266,13 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 	public void onPageSelected(int index) {
 		// if "notes" page, then blue, if "private notes" page, then green
 		
-		int colorId = R.color.light_blue;
+		currentIndex = index;
+		
+		int colorId = R.color.light_red;
 		if(index == 1){
-			colorId = R.color.light_green;
+			colorId = R.color.light_blue;
 		} else if(index == 2){
-			colorId = R.color.light_red;
+			colorId = R.color.light_gray;
 		}
 		int color = getResources().getColor(colorId);
 		
@@ -285,6 +287,11 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 		Intent intent = new Intent(this, NoteDetailActivity.class);
 		Uri data = NoteEntry.buildSingleNoteUri(id);
 		intent.setData(data);
+		
+		boolean recycle = (currentIndex == 2);	// the last fragment is the recycle fragment
+		intent.putExtra(NoteDetailFragment.EXTRA_NOTE_RECYCLE, recycle);
+		
+		intent.putExtra(NoteDetailActivity.EXTRA_COLOR, currentColor);
 		startActivity(intent);
 		
 	}

@@ -1,9 +1,13 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.mypagertabs.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
 public class MyUtilities {
@@ -27,5 +31,12 @@ public class MyUtilities {
 	
 	public static String getSimpleDateString(Date date){
 		return sFormat.format(date);
+	}
+
+	public static BitmapDrawable makeSingleColorDrawable(Context context, int color){
+		Bitmap bitmap = Bitmap.createBitmap(1, 1, Config.ARGB_8888);
+		bitmap.setPixel(0, 0, color);
+		BitmapDrawable image = new BitmapDrawable(context.getResources(), bitmap);
+		return image;
 	}
 }

@@ -113,6 +113,14 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 			item.setVisible(false);	// note is restored, so no restore is needed
 			mRecyle = false;
 			restoreNote();
+		} else if(id == R.id.action_edit_note){
+			Intent intent = new Intent(getActivity(), NewNoteActivity.class);
+			intent.putExtra(NewNoteActivity.EDIT_NOTE, true);
+			intent.putExtra(NewNoteActivity.EDIT_NOTE_ID, ContentUris.parseId(mNoteItemUri));
+			intent.putExtra(Intent.EXTRA_TEXT, mNote);
+			intent.putExtra(Intent.EXTRA_SUBJECT, mTitle);
+			startActivity(intent);
+			return true;
 		}
 //		else if(id == R.id.action_share){
 //			ShareActionProvider provider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);

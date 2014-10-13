@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ssynhtn.mypagertabs.data.NoteContract;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 import com.ssynhtn.mypagertabs.util.MyUtilities;
 
@@ -26,6 +27,16 @@ public class NewNoteActivity extends ColorActionBarActivity {
 	// if intent has this integer extra and value not 0, then the recycle property of new item 
 	// is seen as true
 	public static final String EXTRA_RECYLE = "extra_recycle";
+	
+	
+	// now this activity supports editing old notes, these two refer to that
+	public static final String EDIT_NOTE = "edit_note";
+	public static final String EDIT_NOTE_ID = "edit_note_id";
+	private boolean editNote;
+	private long noteId;
+	// when saving note, if oldNote and oldTitle are not changed, then don't save at all
+	private String oldTitle;
+	private String oldNote;
 	
 	private EditText mEditText;
 	private EditText mTitleEditText;
@@ -72,6 +83,7 @@ public class NewNoteActivity extends ColorActionBarActivity {
 		String mimeType = intent.getType();
 		Log.d(TAG, "mime type is: " + mimeType);
 		if(Intent.ACTION_SEND.equals(action) && "text/plain".equals(mimeType)){
+			Log.d(TAG, "creating note from shared stuff");
 			if(intent.hasExtra(Intent.EXTRA_TEXT)){
 				String text = intent.getStringExtra(Intent.EXTRA_TEXT);
 				mEditText.setText(text);
@@ -81,8 +93,21 @@ public class NewNoteActivity extends ColorActionBarActivity {
 			if(intent.hasExtra(Intent.EXTRA_SUBJECT)){
 				mTitleEditText.setText(intent.getStringExtra(Intent.EXTRA_SUBJECT));
 			}
-		}else {
-			Log.d(TAG, "bad intent!");
+		}else if(intent.hasExtra(EDIT_NOTE) && intent.getBooleanExtra(EDIT_NOTE, false)){
+			// edit old note
+			Log.d(TAG, "edit old note");
+			noteId = intent.getLongExtra(EDIT_NOTE_ID, -1);
+			if(noteId == -1){
+				throw new IllegalArgumentException("can't edit note with no id");
+			}
+			oldNote = intent.getStringExtra(Intent.EXTRA_TEXT);
+			oldTitle = intent.getStringExtra(Intent.EXTRA_SUBJECT);
+			editNote = true;
+			
+			mEditText.setText(oldNote);
+			mTitleEditText.setText(oldTitle);
+		} else {
+			Log.d(TAG, "creating new note from scratch");
 		}
 		
 	}
@@ -92,22 +117,51 @@ public class NewNoteActivity extends ColorActionBarActivity {
 		String title = mTitleEditText.getText().toString();
 		String text = mEditText.getText().toString();
 		if(text.equals("") && title.equals("")){
-			Toast.makeText(this, "Can't save empty note!", Toast.LENGTH_SHORT).show();
-			return;
+			if(editNote){	// old note now edited to empty
+				Toast.makeText(this, "deleting empty note", Toast.LENGTH_SHORT).show();
+				deleteNote(noteId);
+			}else{	// new note, but empty
+				Toast.makeText(this, "Can't save empty note!", Toast.LENGTH_SHORT).show();
+			}
+		} else if(editNote){	// edit note
+			if(title.equals(oldTitle) && text.equals(oldNote)){
+				// no meaningful editing done
+				Toast.makeText(this, "No Edit done", Toast.LENGTH_SHORT).show();
+			}else{
+				updateNote(noteId, title, text);
+			}
+		} else {
+			NoteItem item = new NoteItem(title, text);
+			
+			// if EXTRA_RECYCLE is set to not 0, then deemed as recycle = true
+			Intent intent = getIntent();
+			if(intent.hasExtra(EXTRA_RECYLE) && intent.getIntExtra(EXTRA_RECYLE, 0) != 0){
+				item.setRecycle(true);
+			}
+			addNewNoteItem(item);
 		}
-		NoteItem item = new NoteItem(title, text);
-		
-		// if EXTRA_RECYCLE is set to not 0, then deemed as recycle = true
-		Intent intent = getIntent();
-		if(intent.hasExtra(EXTRA_RECYLE) && intent.getIntExtra(EXTRA_RECYLE, 0) != 0){
-			item.setRecycle(true);
-		}
-		addNewNoteItem(item);
+			
+			
 	}
 	
-	private void addNewNoteItem(NoteItem item){
-		ContentResolver resolver = getContentResolver();
+	private void deleteNote(long noteId){
+		AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) {
+		};
 		
+		handler.startDelete(0, null, NoteEntry.buildSingleNoteUri(noteId), null, null);
+	}
+	
+	private void updateNote(long noteId, String title, String note){
+		ContentValues values = new ContentValues(2);
+		values.put(NoteEntry.COLUMN_NOTE, note);
+		values.put(NoteEntry.COLUMN_TITLE, title);
+		
+		AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) {
+		};
+		handler.startUpdate(0, null, NoteEntry.buildSingleNoteUri(noteId), values, null, null);
+	}
+	
+	private void addNewNoteItem(NoteItem item){		
 		ContentValues values = new ContentValues();
 		values.put(NoteEntry.COLUMN_TITLE, item.getTitle());
 		values.put(NoteEntry.COLUMN_NOTE, item.getNote());

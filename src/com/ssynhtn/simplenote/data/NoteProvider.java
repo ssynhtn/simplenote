@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs.data;
+package com.ssynhtn.simplenote.data;
 
 import java.util.Arrays;
 
@@ -14,10 +14,10 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
-import com.ssynhtn.mypagertabs.data.NoteContract.ReminderNoteEntry;
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.data.NoteContract.ReminderEntry;
+import com.ssynhtn.simplenote.data.NoteContract.ReminderNoteEntry;
+import com.ssynhtn.simplenote.util.MyUtilities;
 
 public class NoteProvider extends ContentProvider {
 

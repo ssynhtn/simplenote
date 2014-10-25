@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import android.app.Notification;
 import android.app.NotificationManager;

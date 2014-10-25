@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 public final class R {
     public static final class anim {
@@ -839,13 +839,13 @@ containing a value of this type.
         public static final int windowSplitActionBar=0x7f010002;
     }
     public static final class bool {
-        public static final int abc_action_bar_embed_tabs_pre_jb=0x7f080000;
-        public static final int abc_action_bar_expanded_action_views_exclusive=0x7f080001;
+        public static final int abc_action_bar_embed_tabs_pre_jb=0x7f070000;
+        public static final int abc_action_bar_expanded_action_views_exclusive=0x7f070001;
         /**  Whether action menu items should be displayed in ALLCAPS or not.
          Defaults to true. If this is not appropriate for specific locales
          it should be disabled in that locale's resources. 
          */
-        public static final int abc_config_actionMenuItemAllCaps=0x7f080005;
+        public static final int abc_config_actionMenuItemAllCaps=0x7f070005;
         /**  Whether action menu items should obey the "withText" showAsAction
     flag. This may be set to false for situations where space is
     extremely limited. 
@@ -853,22 +853,22 @@ containing a value of this type.
          This may be set to false for situations where space is
          extremely limited. 
          */
-        public static final int abc_config_allowActionMenuItemTextWithIcon=0x7f080004;
-        public static final int abc_config_showMenuShortcutsWhenKeyboardPresent=0x7f080003;
-        public static final int abc_split_action_bar_is_narrow=0x7f080002;
+        public static final int abc_config_allowActionMenuItemTextWithIcon=0x7f070004;
+        public static final int abc_config_showMenuShortcutsWhenKeyboardPresent=0x7f070003;
+        public static final int abc_split_action_bar_is_narrow=0x7f070002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f06000a;
-        public static final int abc_search_url_text_normal=0x7f060001;
-        public static final int abc_search_url_text_pressed=0x7f060003;
-        public static final int abc_search_url_text_selected=0x7f060002;
-        public static final int background_tab_pressed=0x7f060000;
-        public static final int light_blue=0x7f060004;
-        public static final int light_blue_translucent=0x7f060008;
-        public static final int light_gray=0x7f060007;
-        public static final int light_green=0x7f060005;
-        public static final int light_grey_translucent=0x7f060009;
-        public static final int light_red=0x7f060006;
+        public static final int abc_search_url_text_holo=0x7f08000a;
+        public static final int abc_search_url_text_normal=0x7f080000;
+        public static final int abc_search_url_text_pressed=0x7f080002;
+        public static final int abc_search_url_text_selected=0x7f080001;
+        public static final int background_tab_pressed=0x7f080003;
+        public static final int light_blue=0x7f080004;
+        public static final int light_blue_translucent=0x7f080008;
+        public static final int light_gray=0x7f080007;
+        public static final int light_green=0x7f080005;
+        public static final int light_grey_translucent=0x7f080009;
+        public static final int light_red=0x7f080006;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1107,99 +1107,99 @@ containing a value of this type.
         public static final int tabs_pattern=0x7f020067;
     }
     public static final class id {
-        public static final int action_add_note=0x7f070050;
-        public static final int action_add_reminder=0x7f070053;
-        public static final int action_bar=0x7f07001c;
-        public static final int action_bar_activity_content=0x7f070015;
-        public static final int action_bar_container=0x7f07001b;
-        public static final int action_bar_overlay_layout=0x7f07001f;
-        public static final int action_bar_root=0x7f07001a;
-        public static final int action_bar_subtitle=0x7f070023;
-        public static final int action_bar_title=0x7f070022;
-        public static final int action_cancel_note=0x7f07005a;
-        public static final int action_context_bar=0x7f07001d;
-        public static final int action_copy=0x7f07005b;
-        public static final int action_delete=0x7f070052;
-        public static final int action_edit_note=0x7f070057;
-        public static final int action_menu_divider=0x7f070016;
-        public static final int action_menu_presenter=0x7f070017;
-        public static final int action_mode_close_button=0x7f070024;
-        public static final int action_modify_reminder=0x7f070055;
-        public static final int action_reminder_drop_down=0x7f070054;
-        public static final int action_remove_reminder=0x7f070056;
-        public static final int action_restore=0x7f070051;
-        public static final int action_search=0x7f070059;
-        public static final int action_settings=0x7f07005c;
-        public static final int action_share=0x7f070058;
-        public static final int activity_chooser_view_content=0x7f070025;
-        public static final int always=0x7f07000b;
-        public static final int beginning=0x7f070011;
-        public static final int button_add_reminder=0x7f070046;
-        public static final int button_delete_reminder=0x7f07004d;
-        public static final int checkbox=0x7f07002d;
-        public static final int collapseActionView=0x7f07000d;
-        public static final int colors=0x7f07003e;
-        public static final int container=0x7f070042;
-        public static final int date_picker=0x7f07004e;
-        public static final int default_activity_button=0x7f070028;
-        public static final int dialog=0x7f07000e;
-        public static final int disableHome=0x7f070008;
-        public static final int dropdown=0x7f07000f;
-        public static final int edit_query=0x7f070030;
-        public static final int end=0x7f070013;
-        public static final int expand_activities_button=0x7f070026;
-        public static final int expanded_menu=0x7f07002c;
-        public static final int home=0x7f070014;
-        public static final int homeAsUp=0x7f070005;
-        public static final int icon=0x7f07002a;
-        public static final int ifRoom=0x7f07000a;
-        public static final int image=0x7f070027;
-        public static final int listMode=0x7f070001;
-        public static final int list_item=0x7f070029;
-        public static final int list_reminders=0x7f070047;
-        public static final int listview_notes=0x7f070044;
-        public static final int middle=0x7f070012;
-        public static final int never=0x7f070009;
-        public static final int new_note_edittext=0x7f070041;
-        public static final int new_note_title_edittext=0x7f07003f;
-        public static final int none=0x7f070010;
-        public static final int normal=0x7f070000;
-        public static final int note_date_textview=0x7f07004a;
-        public static final int note_text=0x7f070048;
-        public static final int note_textview=0x7f07004b;
-        public static final int note_title=0x7f070045;
-        public static final int note_title_textview=0x7f070049;
-        public static final int progress_circular=0x7f070018;
-        public static final int progress_horizontal=0x7f070019;
-        public static final int query_text=0x7f070043;
-        public static final int radio=0x7f07002f;
-        public static final int reminder_textview=0x7f07004c;
-        public static final int scrollView1=0x7f070040;
-        public static final int search_badge=0x7f070032;
-        public static final int search_bar=0x7f070031;
-        public static final int search_button=0x7f070033;
-        public static final int search_close_btn=0x7f070038;
-        public static final int search_edit_frame=0x7f070034;
-        public static final int search_go_btn=0x7f07003a;
-        public static final int search_mag_icon=0x7f070035;
-        public static final int search_plate=0x7f070036;
-        public static final int search_src_text=0x7f070037;
-        public static final int search_voice_btn=0x7f07003b;
-        public static final int shortcut=0x7f07002e;
-        public static final int showCustom=0x7f070007;
-        public static final int showHome=0x7f070004;
-        public static final int showTitle=0x7f070006;
-        public static final int slidingtabs=0x7f07003c;
-        public static final int split_action_bar=0x7f07001e;
-        public static final int submit_area=0x7f070039;
-        public static final int tabMode=0x7f070002;
-        public static final int time_picker=0x7f07004f;
-        public static final int title=0x7f07002b;
-        public static final int top_action_bar=0x7f070020;
-        public static final int up=0x7f070021;
-        public static final int useLogo=0x7f070003;
-        public static final int viewpager=0x7f07003d;
-        public static final int withText=0x7f07000c;
+        public static final int action_add_note=0x7f060050;
+        public static final int action_add_reminder=0x7f060053;
+        public static final int action_bar=0x7f06001c;
+        public static final int action_bar_activity_content=0x7f060015;
+        public static final int action_bar_container=0x7f06001b;
+        public static final int action_bar_overlay_layout=0x7f06001f;
+        public static final int action_bar_root=0x7f06001a;
+        public static final int action_bar_subtitle=0x7f060023;
+        public static final int action_bar_title=0x7f060022;
+        public static final int action_cancel_note=0x7f06005a;
+        public static final int action_context_bar=0x7f06001d;
+        public static final int action_copy=0x7f06005b;
+        public static final int action_delete=0x7f060052;
+        public static final int action_edit_note=0x7f060057;
+        public static final int action_menu_divider=0x7f060016;
+        public static final int action_menu_presenter=0x7f060017;
+        public static final int action_mode_close_button=0x7f060024;
+        public static final int action_modify_reminder=0x7f060055;
+        public static final int action_reminder_drop_down=0x7f060054;
+        public static final int action_remove_reminder=0x7f060056;
+        public static final int action_restore=0x7f060051;
+        public static final int action_search=0x7f060059;
+        public static final int action_settings=0x7f06005c;
+        public static final int action_share=0x7f060058;
+        public static final int activity_chooser_view_content=0x7f060025;
+        public static final int always=0x7f06000b;
+        public static final int beginning=0x7f060011;
+        public static final int button_add_reminder=0x7f060046;
+        public static final int button_delete_reminder=0x7f06004d;
+        public static final int checkbox=0x7f06002d;
+        public static final int collapseActionView=0x7f06000d;
+        public static final int colors=0x7f06003e;
+        public static final int container=0x7f060042;
+        public static final int date_picker=0x7f06004e;
+        public static final int default_activity_button=0x7f060028;
+        public static final int dialog=0x7f06000e;
+        public static final int disableHome=0x7f060008;
+        public static final int dropdown=0x7f06000f;
+        public static final int edit_query=0x7f060030;
+        public static final int end=0x7f060013;
+        public static final int expand_activities_button=0x7f060026;
+        public static final int expanded_menu=0x7f06002c;
+        public static final int home=0x7f060014;
+        public static final int homeAsUp=0x7f060005;
+        public static final int icon=0x7f06002a;
+        public static final int ifRoom=0x7f06000a;
+        public static final int image=0x7f060027;
+        public static final int listMode=0x7f060001;
+        public static final int list_item=0x7f060029;
+        public static final int list_reminders=0x7f060047;
+        public static final int listview_notes=0x7f060044;
+        public static final int middle=0x7f060012;
+        public static final int never=0x7f060009;
+        public static final int new_note_edittext=0x7f060041;
+        public static final int new_note_title_edittext=0x7f06003f;
+        public static final int none=0x7f060010;
+        public static final int normal=0x7f060000;
+        public static final int note_date_textview=0x7f06004a;
+        public static final int note_text=0x7f060048;
+        public static final int note_textview=0x7f06004b;
+        public static final int note_title=0x7f060045;
+        public static final int note_title_textview=0x7f060049;
+        public static final int progress_circular=0x7f060018;
+        public static final int progress_horizontal=0x7f060019;
+        public static final int query_text=0x7f060043;
+        public static final int radio=0x7f06002f;
+        public static final int reminder_textview=0x7f06004c;
+        public static final int scrollView1=0x7f060040;
+        public static final int search_badge=0x7f060032;
+        public static final int search_bar=0x7f060031;
+        public static final int search_button=0x7f060033;
+        public static final int search_close_btn=0x7f060038;
+        public static final int search_edit_frame=0x7f060034;
+        public static final int search_go_btn=0x7f06003a;
+        public static final int search_mag_icon=0x7f060035;
+        public static final int search_plate=0x7f060036;
+        public static final int search_src_text=0x7f060037;
+        public static final int search_voice_btn=0x7f06003b;
+        public static final int shortcut=0x7f06002e;
+        public static final int showCustom=0x7f060007;
+        public static final int showHome=0x7f060004;
+        public static final int showTitle=0x7f060006;
+        public static final int slidingtabs=0x7f06003c;
+        public static final int split_action_bar=0x7f06001e;
+        public static final int submit_area=0x7f060039;
+        public static final int tabMode=0x7f060002;
+        public static final int time_picker=0x7f06004f;
+        public static final int title=0x7f06002b;
+        public static final int top_action_bar=0x7f060020;
+        public static final int up=0x7f060021;
+        public static final int useLogo=0x7f060003;
+        public static final int viewpager=0x7f06003d;
+        public static final int withText=0x7f06000c;
     }
     public static final class integer {
         /**  The maximum number of action buttons that should be permitted within
@@ -1602,26 +1602,26 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBar_background com.ssynhtn.mypagertabs:background}</code></td><td> Specifies a background drawable for the action bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_backgroundSplit com.ssynhtn.mypagertabs:backgroundSplit}</code></td><td> Specifies a background drawable for the bottom component of a split action bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_backgroundStacked com.ssynhtn.mypagertabs:backgroundStacked}</code></td><td> Specifies a background drawable for a second stacked row of the action bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_customNavigationLayout com.ssynhtn.mypagertabs:customNavigationLayout}</code></td><td> Specifies a layout for custom navigation.</td></tr>
-           <tr><td><code>{@link #ActionBar_displayOptions com.ssynhtn.mypagertabs:displayOptions}</code></td><td> Options affecting how the action bar is displayed.</td></tr>
-           <tr><td><code>{@link #ActionBar_divider com.ssynhtn.mypagertabs:divider}</code></td><td> Specifies the drawable used for item dividers.</td></tr>
-           <tr><td><code>{@link #ActionBar_height com.ssynhtn.mypagertabs:height}</code></td><td> Specifies a fixed height.</td></tr>
-           <tr><td><code>{@link #ActionBar_homeLayout com.ssynhtn.mypagertabs:homeLayout}</code></td><td> Specifies a layout to use for the "home" section of the action bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_icon com.ssynhtn.mypagertabs:icon}</code></td><td> Specifies the drawable used for the application icon.</td></tr>
-           <tr><td><code>{@link #ActionBar_indeterminateProgressStyle com.ssynhtn.mypagertabs:indeterminateProgressStyle}</code></td><td> Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
-           <tr><td><code>{@link #ActionBar_itemPadding com.ssynhtn.mypagertabs:itemPadding}</code></td><td> Specifies padding that should be applied to the left and right sides of
+           <tr><td><code>{@link #ActionBar_background com.ssynhtn.simplenote:background}</code></td><td> Specifies a background drawable for the action bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_backgroundSplit com.ssynhtn.simplenote:backgroundSplit}</code></td><td> Specifies a background drawable for the bottom component of a split action bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_backgroundStacked com.ssynhtn.simplenote:backgroundStacked}</code></td><td> Specifies a background drawable for a second stacked row of the action bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_customNavigationLayout com.ssynhtn.simplenote:customNavigationLayout}</code></td><td> Specifies a layout for custom navigation.</td></tr>
+           <tr><td><code>{@link #ActionBar_displayOptions com.ssynhtn.simplenote:displayOptions}</code></td><td> Options affecting how the action bar is displayed.</td></tr>
+           <tr><td><code>{@link #ActionBar_divider com.ssynhtn.simplenote:divider}</code></td><td> Specifies the drawable used for item dividers.</td></tr>
+           <tr><td><code>{@link #ActionBar_height com.ssynhtn.simplenote:height}</code></td><td> Specifies a fixed height.</td></tr>
+           <tr><td><code>{@link #ActionBar_homeLayout com.ssynhtn.simplenote:homeLayout}</code></td><td> Specifies a layout to use for the "home" section of the action bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_icon com.ssynhtn.simplenote:icon}</code></td><td> Specifies the drawable used for the application icon.</td></tr>
+           <tr><td><code>{@link #ActionBar_indeterminateProgressStyle com.ssynhtn.simplenote:indeterminateProgressStyle}</code></td><td> Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
+           <tr><td><code>{@link #ActionBar_itemPadding com.ssynhtn.simplenote:itemPadding}</code></td><td> Specifies padding that should be applied to the left and right sides of
              system-provided items in the bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_logo com.ssynhtn.mypagertabs:logo}</code></td><td> Specifies the drawable used for the application logo.</td></tr>
-           <tr><td><code>{@link #ActionBar_navigationMode com.ssynhtn.mypagertabs:navigationMode}</code></td><td> The type of navigation to use.</td></tr>
-           <tr><td><code>{@link #ActionBar_progressBarPadding com.ssynhtn.mypagertabs:progressBarPadding}</code></td><td> Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_progressBarStyle com.ssynhtn.mypagertabs:progressBarStyle}</code></td><td> Specifies a style resource to use for an embedded progress bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_subtitle com.ssynhtn.mypagertabs:subtitle}</code></td><td> Specifies subtitle text used for navigationMode="normal" </td></tr>
-           <tr><td><code>{@link #ActionBar_subtitleTextStyle com.ssynhtn.mypagertabs:subtitleTextStyle}</code></td><td> Specifies a style to use for subtitle text.</td></tr>
-           <tr><td><code>{@link #ActionBar_title com.ssynhtn.mypagertabs:title}</code></td><td> Specifies title text used for navigationMode="normal" </td></tr>
-           <tr><td><code>{@link #ActionBar_titleTextStyle com.ssynhtn.mypagertabs:titleTextStyle}</code></td><td> Specifies a style to use for title text.</td></tr>
+           <tr><td><code>{@link #ActionBar_logo com.ssynhtn.simplenote:logo}</code></td><td> Specifies the drawable used for the application logo.</td></tr>
+           <tr><td><code>{@link #ActionBar_navigationMode com.ssynhtn.simplenote:navigationMode}</code></td><td> The type of navigation to use.</td></tr>
+           <tr><td><code>{@link #ActionBar_progressBarPadding com.ssynhtn.simplenote:progressBarPadding}</code></td><td> Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_progressBarStyle com.ssynhtn.simplenote:progressBarStyle}</code></td><td> Specifies a style resource to use for an embedded progress bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_subtitle com.ssynhtn.simplenote:subtitle}</code></td><td> Specifies subtitle text used for navigationMode="normal" </td></tr>
+           <tr><td><code>{@link #ActionBar_subtitleTextStyle com.ssynhtn.simplenote:subtitleTextStyle}</code></td><td> Specifies a style to use for subtitle text.</td></tr>
+           <tr><td><code>{@link #ActionBar_title com.ssynhtn.simplenote:title}</code></td><td> Specifies title text used for navigationMode="normal" </td></tr>
+           <tr><td><code>{@link #ActionBar_titleTextStyle com.ssynhtn.simplenote:titleTextStyle}</code></td><td> Specifies a style to use for title text.</td></tr>
            </table>
            @see #ActionBar_background
            @see #ActionBar_backgroundSplit
@@ -1659,7 +1659,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:background
+          @attr name com.ssynhtn.simplenote:background
         */
         public static final int ActionBar_background = 10;
         /**
@@ -1673,7 +1673,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:backgroundSplit
+          @attr name com.ssynhtn.simplenote:backgroundSplit
         */
         public static final int ActionBar_backgroundSplit = 12;
         /**
@@ -1687,7 +1687,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:backgroundStacked
+          @attr name com.ssynhtn.simplenote:backgroundStacked
         */
         public static final int ActionBar_backgroundStacked = 11;
         /**
@@ -1699,7 +1699,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:customNavigationLayout
+          @attr name com.ssynhtn.simplenote:customNavigationLayout
         */
         public static final int ActionBar_customNavigationLayout = 13;
         /**
@@ -1722,7 +1722,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>disableHome</code></td><td>0x20</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:displayOptions
+          @attr name com.ssynhtn.simplenote:displayOptions
         */
         public static final int ActionBar_displayOptions = 3;
         /**
@@ -1734,7 +1734,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:divider
+          @attr name com.ssynhtn.simplenote:divider
         */
         public static final int ActionBar_divider = 9;
         /**
@@ -1752,7 +1752,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:height
+          @attr name com.ssynhtn.simplenote:height
         */
         public static final int ActionBar_height = 1;
         /**
@@ -1764,7 +1764,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:homeLayout
+          @attr name com.ssynhtn.simplenote:homeLayout
         */
         public static final int ActionBar_homeLayout = 14;
         /**
@@ -1776,7 +1776,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:icon
+          @attr name com.ssynhtn.simplenote:icon
         */
         public static final int ActionBar_icon = 7;
         /**
@@ -1788,7 +1788,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:indeterminateProgressStyle
+          @attr name com.ssynhtn.simplenote:indeterminateProgressStyle
         */
         public static final int ActionBar_indeterminateProgressStyle = 16;
         /**
@@ -1807,7 +1807,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:itemPadding
+          @attr name com.ssynhtn.simplenote:itemPadding
         */
         public static final int ActionBar_itemPadding = 18;
         /**
@@ -1819,7 +1819,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:logo
+          @attr name com.ssynhtn.simplenote:logo
         */
         public static final int ActionBar_logo = 8;
         /**
@@ -1839,7 +1839,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>tabMode</code></td><td>2</td><td> The action bar will use a series of horizontal tabs for navigation. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:navigationMode
+          @attr name com.ssynhtn.simplenote:navigationMode
         */
         public static final int ActionBar_navigationMode = 2;
         /**
@@ -1857,7 +1857,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:progressBarPadding
+          @attr name com.ssynhtn.simplenote:progressBarPadding
         */
         public static final int ActionBar_progressBarPadding = 17;
         /**
@@ -1869,7 +1869,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:progressBarStyle
+          @attr name com.ssynhtn.simplenote:progressBarStyle
         */
         public static final int ActionBar_progressBarStyle = 15;
         /**
@@ -1885,7 +1885,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:subtitle
+          @attr name com.ssynhtn.simplenote:subtitle
         */
         public static final int ActionBar_subtitle = 4;
         /**
@@ -1897,7 +1897,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:subtitleTextStyle
+          @attr name com.ssynhtn.simplenote:subtitleTextStyle
         */
         public static final int ActionBar_subtitleTextStyle = 6;
         /**
@@ -1913,7 +1913,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:title
+          @attr name com.ssynhtn.simplenote:title
         */
         public static final int ActionBar_title = 0;
         /**
@@ -1925,7 +1925,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:titleTextStyle
+          @attr name com.ssynhtn.simplenote:titleTextStyle
         */
         public static final int ActionBar_titleTextStyle = 5;
         /**  Valid LayoutParams for views placed in the action bar as custom views. 
@@ -1956,17 +1956,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowActionBar com.ssynhtn.mypagertabs:windowActionBar}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowActionBarOverlay com.ssynhtn.mypagertabs:windowActionBarOverlay}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMajor com.ssynhtn.mypagertabs:windowFixedHeightMajor}</code></td><td> A fixed height for the window along the major axis of the screen,
+           <tr><td><code>{@link #ActionBarWindow_windowActionBar com.ssynhtn.simplenote:windowActionBar}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowActionBarOverlay com.ssynhtn.simplenote:windowActionBarOverlay}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMajor com.ssynhtn.simplenote:windowFixedHeightMajor}</code></td><td> A fixed height for the window along the major axis of the screen,
              that is, when in portrait.</td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMinor com.ssynhtn.mypagertabs:windowFixedHeightMinor}</code></td><td> A fixed height for the window along the minor axis of the screen,
+           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMinor com.ssynhtn.simplenote:windowFixedHeightMinor}</code></td><td> A fixed height for the window along the minor axis of the screen,
              that is, when in landscape.</td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMajor com.ssynhtn.mypagertabs:windowFixedWidthMajor}</code></td><td> A fixed width for the window along the major axis of the screen,
+           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMajor com.ssynhtn.simplenote:windowFixedWidthMajor}</code></td><td> A fixed width for the window along the major axis of the screen,
              that is, when in landscape.</td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMinor com.ssynhtn.mypagertabs:windowFixedWidthMinor}</code></td><td> A fixed width for the window along the minor axis of the screen,
+           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMinor com.ssynhtn.simplenote:windowFixedWidthMinor}</code></td><td> A fixed width for the window along the minor axis of the screen,
              that is, when in portrait.</td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowSplitActionBar com.ssynhtn.mypagertabs:windowSplitActionBar}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowSplitActionBar com.ssynhtn.simplenote:windowSplitActionBar}</code></td><td></td></tr>
            </table>
            @see #ActionBarWindow_windowActionBar
            @see #ActionBarWindow_windowActionBarOverlay
@@ -1981,7 +1981,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f010004, 0x7f010005, 0x7f010006
         };
         /**
-          <p>This symbol is the offset where the {@link com.ssynhtn.mypagertabs.R.attr#windowActionBar}
+          <p>This symbol is the offset where the {@link com.ssynhtn.simplenote.R.attr#windowActionBar}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1991,11 +1991,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.ssynhtn.mypagertabs:windowActionBar
+          @attr name com.ssynhtn.simplenote:windowActionBar
         */
         public static final int ActionBarWindow_windowActionBar = 0;
         /**
-          <p>This symbol is the offset where the {@link com.ssynhtn.mypagertabs.R.attr#windowActionBarOverlay}
+          <p>This symbol is the offset where the {@link com.ssynhtn.simplenote.R.attr#windowActionBarOverlay}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -2005,7 +2005,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.ssynhtn.mypagertabs:windowActionBarOverlay
+          @attr name com.ssynhtn.simplenote:windowActionBarOverlay
         */
         public static final int ActionBarWindow_windowActionBarOverlay = 1;
         /**
@@ -2028,7 +2028,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:windowFixedHeightMajor
+          @attr name com.ssynhtn.simplenote:windowFixedHeightMajor
         */
         public static final int ActionBarWindow_windowFixedHeightMajor = 6;
         /**
@@ -2051,7 +2051,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:windowFixedHeightMinor
+          @attr name com.ssynhtn.simplenote:windowFixedHeightMinor
         */
         public static final int ActionBarWindow_windowFixedHeightMinor = 4;
         /**
@@ -2074,7 +2074,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:windowFixedWidthMajor
+          @attr name com.ssynhtn.simplenote:windowFixedWidthMajor
         */
         public static final int ActionBarWindow_windowFixedWidthMajor = 3;
         /**
@@ -2097,11 +2097,11 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:windowFixedWidthMinor
+          @attr name com.ssynhtn.simplenote:windowFixedWidthMinor
         */
         public static final int ActionBarWindow_windowFixedWidthMinor = 5;
         /**
-          <p>This symbol is the offset where the {@link com.ssynhtn.mypagertabs.R.attr#windowSplitActionBar}
+          <p>This symbol is the offset where the {@link com.ssynhtn.simplenote.R.attr#windowSplitActionBar}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -2111,7 +2111,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.ssynhtn.mypagertabs:windowSplitActionBar
+          @attr name com.ssynhtn.simplenote:windowSplitActionBar
         */
         public static final int ActionBarWindow_windowSplitActionBar = 2;
         /** Attributes that can be used with a ActionMenuItemView.
@@ -2144,11 +2144,11 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionMode_background com.ssynhtn.mypagertabs:background}</code></td><td> Specifies a background for the action mode bar.</td></tr>
-           <tr><td><code>{@link #ActionMode_backgroundSplit com.ssynhtn.mypagertabs:backgroundSplit}</code></td><td> Specifies a background for the split action mode bar.</td></tr>
-           <tr><td><code>{@link #ActionMode_height com.ssynhtn.mypagertabs:height}</code></td><td> Specifies a fixed height for the action mode bar.</td></tr>
-           <tr><td><code>{@link #ActionMode_subtitleTextStyle com.ssynhtn.mypagertabs:subtitleTextStyle}</code></td><td> Specifies a style to use for subtitle text.</td></tr>
-           <tr><td><code>{@link #ActionMode_titleTextStyle com.ssynhtn.mypagertabs:titleTextStyle}</code></td><td> Specifies a style to use for title text.</td></tr>
+           <tr><td><code>{@link #ActionMode_background com.ssynhtn.simplenote:background}</code></td><td> Specifies a background for the action mode bar.</td></tr>
+           <tr><td><code>{@link #ActionMode_backgroundSplit com.ssynhtn.simplenote:backgroundSplit}</code></td><td> Specifies a background for the split action mode bar.</td></tr>
+           <tr><td><code>{@link #ActionMode_height com.ssynhtn.simplenote:height}</code></td><td> Specifies a fixed height for the action mode bar.</td></tr>
+           <tr><td><code>{@link #ActionMode_subtitleTextStyle com.ssynhtn.simplenote:subtitleTextStyle}</code></td><td> Specifies a style to use for subtitle text.</td></tr>
+           <tr><td><code>{@link #ActionMode_titleTextStyle com.ssynhtn.simplenote:titleTextStyle}</code></td><td> Specifies a style to use for title text.</td></tr>
            </table>
            @see #ActionMode_background
            @see #ActionMode_backgroundSplit
@@ -2169,7 +2169,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:background
+          @attr name com.ssynhtn.simplenote:background
         */
         public static final int ActionMode_background = 3;
         /**
@@ -2183,7 +2183,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:backgroundSplit
+          @attr name com.ssynhtn.simplenote:backgroundSplit
         */
         public static final int ActionMode_backgroundSplit = 4;
         /**
@@ -2201,7 +2201,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:height
+          @attr name com.ssynhtn.simplenote:height
         */
         public static final int ActionMode_height = 0;
         /**
@@ -2213,7 +2213,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:subtitleTextStyle
+          @attr name com.ssynhtn.simplenote:subtitleTextStyle
         */
         public static final int ActionMode_subtitleTextStyle = 2;
         /**
@@ -2225,7 +2225,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:titleTextStyle
+          @attr name com.ssynhtn.simplenote:titleTextStyle
         */
         public static final int ActionMode_titleTextStyle = 1;
         /**  Attrbitutes for a ActivityChooserView. 
@@ -2234,8 +2234,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable com.ssynhtn.mypagertabs:expandActivityOverflowButtonDrawable}</code></td><td> The drawable to show in the button for expanding the activities overflow popup.</td></tr>
-           <tr><td><code>{@link #ActivityChooserView_initialActivityCount com.ssynhtn.mypagertabs:initialActivityCount}</code></td><td> The maximal number of items initially shown in the activity list.</td></tr>
+           <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable com.ssynhtn.simplenote:expandActivityOverflowButtonDrawable}</code></td><td> The drawable to show in the button for expanding the activities overflow popup.</td></tr>
+           <tr><td><code>{@link #ActivityChooserView_initialActivityCount com.ssynhtn.simplenote:initialActivityCount}</code></td><td> The maximal number of items initially shown in the activity list.</td></tr>
            </table>
            @see #ActivityChooserView_expandActivityOverflowButtonDrawable
            @see #ActivityChooserView_initialActivityCount
@@ -2257,7 +2257,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:expandActivityOverflowButtonDrawable
+          @attr name com.ssynhtn.simplenote:expandActivityOverflowButtonDrawable
         */
         public static final int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
         /**
@@ -2273,7 +2273,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:initialActivityCount
+          @attr name com.ssynhtn.simplenote:initialActivityCount
         */
         public static final int ActivityChooserView_initialActivityCount = 0;
         /** Attributes that can be used with a CompatTextView.
@@ -2282,7 +2282,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CompatTextView_textAllCaps com.ssynhtn.mypagertabs:textAllCaps}</code></td><td> Present the text in ALL CAPS.</td></tr>
+           <tr><td><code>{@link #CompatTextView_textAllCaps com.ssynhtn.simplenote:textAllCaps}</code></td><td> Present the text in ALL CAPS.</td></tr>
            </table>
            @see #CompatTextView_textAllCaps
          */
@@ -2299,7 +2299,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:textAllCaps
+          @attr name com.ssynhtn.simplenote:textAllCaps
         */
         public static final int CompatTextView_textAllCaps = 0;
         /** Attributes that can be used with a LinearLayoutICS.
@@ -2308,9 +2308,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #LinearLayoutICS_divider com.ssynhtn.mypagertabs:divider}</code></td><td> Drawable to use as a vertical divider between buttons.</td></tr>
-           <tr><td><code>{@link #LinearLayoutICS_dividerPadding com.ssynhtn.mypagertabs:dividerPadding}</code></td><td> Size of padding on either end of a divider.</td></tr>
-           <tr><td><code>{@link #LinearLayoutICS_showDividers com.ssynhtn.mypagertabs:showDividers}</code></td><td> Setting for which dividers to show.</td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_divider com.ssynhtn.simplenote:divider}</code></td><td> Drawable to use as a vertical divider between buttons.</td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_dividerPadding com.ssynhtn.simplenote:dividerPadding}</code></td><td> Size of padding on either end of a divider.</td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_showDividers com.ssynhtn.simplenote:showDividers}</code></td><td> Setting for which dividers to show.</td></tr>
            </table>
            @see #LinearLayoutICS_divider
            @see #LinearLayoutICS_dividerPadding
@@ -2328,7 +2328,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:divider
+          @attr name com.ssynhtn.simplenote:divider
         */
         public static final int LinearLayoutICS_divider = 0;
         /**
@@ -2346,7 +2346,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:dividerPadding
+          @attr name com.ssynhtn.simplenote:dividerPadding
         */
         public static final int LinearLayoutICS_dividerPadding = 2;
         /**
@@ -2367,7 +2367,7 @@ containing a value of this type.
 <tr><td><code>end</code></td><td>4</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:showDividers
+          @attr name com.ssynhtn.simplenote:showDividers
         */
         public static final int LinearLayoutICS_showDividers = 1;
         /**  Base attributes that are available to all groups. 
@@ -2456,10 +2456,10 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #MenuItem_actionLayout com.ssynhtn.mypagertabs:actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
-           <tr><td><code>{@link #MenuItem_actionProviderClass com.ssynhtn.mypagertabs:actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
+           <tr><td><code>{@link #MenuItem_actionLayout com.ssynhtn.simplenote:actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
+           <tr><td><code>{@link #MenuItem_actionProviderClass com.ssynhtn.simplenote:actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
              and perform operations such as default action for that menu item.</td></tr>
-           <tr><td><code>{@link #MenuItem_actionViewClass com.ssynhtn.mypagertabs:actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
+           <tr><td><code>{@link #MenuItem_actionViewClass com.ssynhtn.simplenote:actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
              action view.</td></tr>
            <tr><td><code>{@link #MenuItem_android_alphabeticShortcut android:alphabeticShortcut}</code></td><td> The alphabetic shortcut key.</td></tr>
            <tr><td><code>{@link #MenuItem_android_checkable android:checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
@@ -2475,7 +2475,7 @@ containing a value of this type.
            <tr><td><code>{@link #MenuItem_android_title android:title}</code></td><td> The title associated with the item.</td></tr>
            <tr><td><code>{@link #MenuItem_android_titleCondensed android:titleCondensed}</code></td><td> The condensed title associated with the item.</td></tr>
            <tr><td><code>{@link #MenuItem_android_visible android:visible}</code></td><td> Whether the item is shown/visible.</td></tr>
-           <tr><td><code>{@link #MenuItem_showAsAction com.ssynhtn.mypagertabs:showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
+           <tr><td><code>{@link #MenuItem_showAsAction com.ssynhtn.simplenote:showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
            </table>
            @see #MenuItem_actionLayout
            @see #MenuItem_actionProviderClass
@@ -2513,7 +2513,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:actionLayout
+          @attr name com.ssynhtn.simplenote:actionLayout
         */
         public static final int MenuItem_actionLayout = 14;
         /**
@@ -2532,7 +2532,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:actionProviderClass
+          @attr name com.ssynhtn.simplenote:actionProviderClass
         */
         public static final int MenuItem_actionProviderClass = 16;
         /**
@@ -2550,7 +2550,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:actionViewClass
+          @attr name com.ssynhtn.simplenote:actionViewClass
         */
         public static final int MenuItem_actionViewClass = 15;
         /**
@@ -2706,7 +2706,7 @@ containing a value of this type.
                  larger segment of its container. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:showAsAction
+          @attr name com.ssynhtn.simplenote:showAsAction
         */
         public static final int MenuItem_showAsAction = 13;
         /** Attributes that can be used with a MenuView.
@@ -2817,8 +2817,8 @@ containing a value of this type.
            <tr><td><code>{@link #SearchView_android_imeOptions android:imeOptions}</code></td><td> The IME options to set on the query text field.</td></tr>
            <tr><td><code>{@link #SearchView_android_inputType android:inputType}</code></td><td> The input type to set on the query text field.</td></tr>
            <tr><td><code>{@link #SearchView_android_maxWidth android:maxWidth}</code></td><td> An optional maximum width of the SearchView.</td></tr>
-           <tr><td><code>{@link #SearchView_iconifiedByDefault com.ssynhtn.mypagertabs:iconifiedByDefault}</code></td><td> The default state of the SearchView.</td></tr>
-           <tr><td><code>{@link #SearchView_queryHint com.ssynhtn.mypagertabs:queryHint}</code></td><td> An optional query hint string to be displayed in the empty query field.</td></tr>
+           <tr><td><code>{@link #SearchView_iconifiedByDefault com.ssynhtn.simplenote:iconifiedByDefault}</code></td><td> The default state of the SearchView.</td></tr>
+           <tr><td><code>{@link #SearchView_queryHint com.ssynhtn.simplenote:queryHint}</code></td><td> An optional query hint string to be displayed in the empty query field.</td></tr>
            </table>
            @see #SearchView_android_imeOptions
            @see #SearchView_android_inputType
@@ -2871,7 +2871,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:iconifiedByDefault
+          @attr name com.ssynhtn.simplenote:iconifiedByDefault
         */
         public static final int SearchView_iconifiedByDefault = 3;
         /**
@@ -2887,7 +2887,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:queryHint
+          @attr name com.ssynhtn.simplenote:queryHint
         */
         public static final int SearchView_queryHint = 4;
         /** Attributes that can be used with a Spinner.
@@ -2904,12 +2904,12 @@ containing a value of this type.
            <tr><td><code>{@link #Spinner_android_dropDownWidth android:dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
            <tr><td><code>{@link #Spinner_android_gravity android:gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
            <tr><td><code>{@link #Spinner_android_popupBackground android:popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled com.ssynhtn.mypagertabs:disableChildrenWhenDisabled}</code></td><td> Whether this spinner should mark child views as enabled/disabled when
+           <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled com.ssynhtn.simplenote:disableChildrenWhenDisabled}</code></td><td> Whether this spinner should mark child views as enabled/disabled when
              the spinner itself is enabled/disabled.</td></tr>
-           <tr><td><code>{@link #Spinner_popupPromptView com.ssynhtn.mypagertabs:popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
+           <tr><td><code>{@link #Spinner_popupPromptView com.ssynhtn.simplenote:popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
              spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #Spinner_prompt com.ssynhtn.mypagertabs:prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
-           <tr><td><code>{@link #Spinner_spinnerMode com.ssynhtn.mypagertabs:spinnerMode}</code></td><td> Display mode for spinner options.</td></tr>
+           <tr><td><code>{@link #Spinner_prompt com.ssynhtn.simplenote:prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
+           <tr><td><code>{@link #Spinner_spinnerMode com.ssynhtn.simplenote:spinnerMode}</code></td><td> Display mode for spinner options.</td></tr>
            </table>
            @see #Spinner_android_dropDownHorizontalOffset
            @see #Spinner_android_dropDownSelector
@@ -2997,7 +2997,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:disableChildrenWhenDisabled
+          @attr name com.ssynhtn.simplenote:disableChildrenWhenDisabled
         */
         public static final int Spinner_disableChildrenWhenDisabled = 9;
         /**
@@ -3011,7 +3011,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:popupPromptView
+          @attr name com.ssynhtn.simplenote:popupPromptView
         */
         public static final int Spinner_popupPromptView = 8;
         /**
@@ -3023,7 +3023,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:prompt
+          @attr name com.ssynhtn.simplenote:prompt
         */
         public static final int Spinner_prompt = 6;
         /**
@@ -3043,7 +3043,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
                  anchored to the spinner widget itself. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:spinnerMode
+          @attr name com.ssynhtn.simplenote:spinnerMode
         */
         public static final int Spinner_spinnerMode = 7;
         /**  These are the standard attributes that make up a complete theme. 
@@ -3052,12 +3052,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Theme_actionDropDownStyle com.ssynhtn.mypagertabs:actionDropDownStyle}</code></td><td> Default ActionBar dropdown style.</td></tr>
-           <tr><td><code>{@link #Theme_dropdownListPreferredItemHeight com.ssynhtn.mypagertabs:dropdownListPreferredItemHeight}</code></td><td> The preferred item height for dropdown lists.</td></tr>
-           <tr><td><code>{@link #Theme_listChoiceBackgroundIndicator com.ssynhtn.mypagertabs:listChoiceBackgroundIndicator}</code></td><td> Drawable used as a background for selected list items.</td></tr>
-           <tr><td><code>{@link #Theme_panelMenuListTheme com.ssynhtn.mypagertabs:panelMenuListTheme}</code></td><td> Default Panel Menu style.</td></tr>
-           <tr><td><code>{@link #Theme_panelMenuListWidth com.ssynhtn.mypagertabs:panelMenuListWidth}</code></td><td> Default Panel Menu width.</td></tr>
-           <tr><td><code>{@link #Theme_popupMenuStyle com.ssynhtn.mypagertabs:popupMenuStyle}</code></td><td> Default PopupMenu style.</td></tr>
+           <tr><td><code>{@link #Theme_actionDropDownStyle com.ssynhtn.simplenote:actionDropDownStyle}</code></td><td> Default ActionBar dropdown style.</td></tr>
+           <tr><td><code>{@link #Theme_dropdownListPreferredItemHeight com.ssynhtn.simplenote:dropdownListPreferredItemHeight}</code></td><td> The preferred item height for dropdown lists.</td></tr>
+           <tr><td><code>{@link #Theme_listChoiceBackgroundIndicator com.ssynhtn.simplenote:listChoiceBackgroundIndicator}</code></td><td> Drawable used as a background for selected list items.</td></tr>
+           <tr><td><code>{@link #Theme_panelMenuListTheme com.ssynhtn.simplenote:panelMenuListTheme}</code></td><td> Default Panel Menu style.</td></tr>
+           <tr><td><code>{@link #Theme_panelMenuListWidth com.ssynhtn.simplenote:panelMenuListWidth}</code></td><td> Default Panel Menu width.</td></tr>
+           <tr><td><code>{@link #Theme_popupMenuStyle com.ssynhtn.simplenote:popupMenuStyle}</code></td><td> Default PopupMenu style.</td></tr>
            </table>
            @see #Theme_actionDropDownStyle
            @see #Theme_dropdownListPreferredItemHeight
@@ -3079,7 +3079,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:actionDropDownStyle
+          @attr name com.ssynhtn.simplenote:actionDropDownStyle
         */
         public static final int Theme_actionDropDownStyle = 0;
         /**
@@ -3097,7 +3097,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:dropdownListPreferredItemHeight
+          @attr name com.ssynhtn.simplenote:dropdownListPreferredItemHeight
         */
         public static final int Theme_dropdownListPreferredItemHeight = 1;
         /**
@@ -3109,7 +3109,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:listChoiceBackgroundIndicator
+          @attr name com.ssynhtn.simplenote:listChoiceBackgroundIndicator
         */
         public static final int Theme_listChoiceBackgroundIndicator = 5;
         /**
@@ -3121,7 +3121,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:panelMenuListTheme
+          @attr name com.ssynhtn.simplenote:panelMenuListTheme
         */
         public static final int Theme_panelMenuListTheme = 4;
         /**
@@ -3139,7 +3139,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:panelMenuListWidth
+          @attr name com.ssynhtn.simplenote:panelMenuListWidth
         */
         public static final int Theme_panelMenuListWidth = 3;
         /**
@@ -3151,7 +3151,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:popupMenuStyle
+          @attr name com.ssynhtn.simplenote:popupMenuStyle
         */
         public static final int Theme_popupMenuStyle = 2;
         /** Attributes that can be used with a View.
@@ -3161,8 +3161,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #View_android_focusable android:focusable}</code></td><td> Boolean that controls whether a view can take focus.</td></tr>
-           <tr><td><code>{@link #View_paddingEnd com.ssynhtn.mypagertabs:paddingEnd}</code></td><td> Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}.</td></tr>
-           <tr><td><code>{@link #View_paddingStart com.ssynhtn.mypagertabs:paddingStart}</code></td><td> Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}.</td></tr>
+           <tr><td><code>{@link #View_paddingEnd com.ssynhtn.simplenote:paddingEnd}</code></td><td> Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}.</td></tr>
+           <tr><td><code>{@link #View_paddingStart com.ssynhtn.simplenote:paddingStart}</code></td><td> Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}.</td></tr>
            </table>
            @see #View_android_focusable
            @see #View_paddingEnd
@@ -3200,7 +3200,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:paddingEnd
+          @attr name com.ssynhtn.simplenote:paddingEnd
         */
         public static final int View_paddingEnd = 2;
         /**
@@ -3218,7 +3218,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.ssynhtn.mypagertabs:paddingStart
+          @attr name com.ssynhtn.simplenote:paddingStart
         */
         public static final int View_paddingStart = 1;
     };

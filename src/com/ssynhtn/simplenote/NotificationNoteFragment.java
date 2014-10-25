@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -12,20 +12,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.data.NoteContract.ReminderNoteEntry;
 
-public class NoteFragment extends BaseNoteFragment {
+public class NotificationNoteFragment extends BaseNoteFragment{
 	
-	private static final String TAG = MyUtilities.createTag(NoteFragment.class);
-
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
 		inflater.inflate(R.menu.fragment_note, menu);
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
 		int id = item.getItemId();
 		if(id == R.id.action_add_note){
 			addNote();
@@ -37,35 +37,30 @@ public class NoteFragment extends BaseNoteFragment {
 	private void addNote(){
 		Intent intent = new Intent(getActivity(), NewNoteActivity.class);
 		startActivity(intent);
-		
 	}
 
 	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		String order = NoteEntry.COLUMN_DATE + " desc";
-		
-		String[] projection = null;
-//		String selection = NoteEntry.COLUMN_RECYCLE + " is NULL or " + NoteEntry.COLUMN_RECYCLE + " = ? ";
-		String selection = NoteEntry.COLUMN_RECYCLE + " = ? ";
-		String[] selectionArgs = new String[]{Integer.toString(0)};
-//		String selection = null;
-//		String[] selectionArgs = null;
-		return new CursorLoader(getActivity(), NoteEntry.CONTENT_URI, projection, selection, selectionArgs, order);
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		// TODO Auto-generated method stub
+		String selection = NoteEntry.COLUMN_RECYCLE + " = 0";
+		String order = NoteEntry.COLUMN_DATE + " DESC";
+//		return new CursorLoader(getActivity(), NoteJoinReminder.CONTENT_URI, null, selection, null, order);
+		return new CursorLoader(getActivity(), ReminderNoteEntry.CONTENT_URI, null, selection, null, order);
+
 	}
 
 	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+	public void onLoadFinished(Loader<Cursor> arg0, Cursor data) {
+		// TODO Auto-generated method stub
 		adapter.swapCursor(data);
 		
 	}
 
 	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
+	public void onLoaderReset(Loader<Cursor> arg0) {
 		// TODO Auto-generated method stub
 		adapter.swapCursor(null);
-		
 	}
-
 
 	@Override
 	protected int putToRecycleOrPermanentDelete(long id) {

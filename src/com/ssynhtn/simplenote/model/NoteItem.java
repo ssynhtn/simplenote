@@ -1,9 +1,9 @@
-package com.ssynhtn.mypagertabs.model;
+package com.ssynhtn.simplenote.model;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.util.MyUtilities;
 
 public class NoteItem implements Serializable {
 	private static final long serialVersionUID = 2123259915902965935L;

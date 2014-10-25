@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs.data;
+package com.ssynhtn.simplenote.data;
 
 import android.app.SearchManager;
 import android.content.ContentUris;
@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
 
 public class NoteContract {
 	
-	public static final String CONTENT_AUTHORITY = "com.ssynhtn.mypagertabs.noteprovider";
+	public static final String CONTENT_AUTHORITY = "com.ssynhtn.simplenote.noteprovider";
 	public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 	public static final String PATH_NOTE = "note";
 	

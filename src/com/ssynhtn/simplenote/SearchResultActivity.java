@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
@@ -16,8 +16,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.util.MyUtilities;
 
 public class SearchResultActivity extends ListActivity implements LoaderCallbacks<Cursor>{
 

@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 
 

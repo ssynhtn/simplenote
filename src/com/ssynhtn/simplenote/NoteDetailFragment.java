@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.AsyncQueryHandler;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -35,11 +34,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ssynhtn.mypagertabs.TwoPickersDialogFragment.OnTimeSetCallback;
-import com.ssynhtn.mypagertabs.adapter.ReminderCursorAdapter;
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.TwoPickersDialogFragment.OnTimeSetCallback;
+import com.ssynhtn.simplenote.adapter.ReminderCursorAdapter;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.data.NoteContract.ReminderEntry;
+import com.ssynhtn.simplenote.util.MyUtilities;
 
 
 public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Cursor>, OnTimeSetCallback {

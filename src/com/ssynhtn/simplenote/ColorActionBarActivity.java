@@ -1,11 +1,11 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.util.MyUtilities;
 
 public class ColorActionBarActivity extends ActionBarActivity {
 	

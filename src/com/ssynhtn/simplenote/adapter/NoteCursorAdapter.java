@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs.adapter;
+package com.ssynhtn.simplenote.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ssynhtn.mypagertabs.R;
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.R;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.util.MyUtilities;
 
 
 public class NoteCursorAdapter extends CursorAdapter {

@@ -1,13 +1,13 @@
-package com.ssynhtn.mypagertabs.data;
+package com.ssynhtn.simplenote.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
-import com.ssynhtn.mypagertabs.data.NoteContract.ReminderNoteEntry;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.data.NoteContract.ReminderEntry;
+import com.ssynhtn.simplenote.data.NoteContract.ReminderNoteEntry;
 
 public class NoteDbHelper extends SQLiteOpenHelper {
 	private static final String TAG = NoteDbHelper.class.getSimpleName();

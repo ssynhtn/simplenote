@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ssynhtn.mypagertabs.NewNoteActivity" >
+    tools:context="com.ssynhtn.simplenote.NewNoteActivity" >
 
     <EditText
         android:id="@+id/new_note_title_edittext"

@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs.util;
+package com.ssynhtn.simplenote.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

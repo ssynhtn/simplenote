@@ -1,7 +1,6 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import android.content.AsyncQueryHandler;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +8,12 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ssynhtn.mypagertabs.data.NoteContract;
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.model.NoteItem;
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.model.NoteItem;
+import com.ssynhtn.simplenote.util.MyUtilities;
 
 public class NewNoteActivity extends ColorActionBarActivity {
 	private static final String TAG = MyUtilities.createTag(NewNoteActivity.class);

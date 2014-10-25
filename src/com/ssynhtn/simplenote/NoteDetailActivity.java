@@ -1,12 +1,10 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.ssynhtn.mypagertabs.NoteDetailFragment.OnDeleteNoteListener;
+import com.ssynhtn.simplenote.NoteDetailFragment.OnDeleteNoteListener;
 
 public class NoteDetailActivity extends ColorActionBarActivity implements OnDeleteNoteListener{
 	

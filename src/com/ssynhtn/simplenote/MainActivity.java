@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,9 +31,9 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
-import com.ssynhtn.mypagertabs.BaseNoteFragment.OnItemClickCallback;
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
-import com.ssynhtn.mypagertabs.util.MyUtilities;
+import com.ssynhtn.simplenote.BaseNoteFragment.OnItemClickCallback;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.util.MyUtilities;
 
 
 public class MainActivity extends ActionBarActivity implements OnPageChangeListener, OnItemClickCallback {

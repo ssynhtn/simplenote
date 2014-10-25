@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs.adapter;
+package com.ssynhtn.simplenote.adapter;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -15,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.ssynhtn.mypagertabs.R;
-import com.ssynhtn.mypagertabs.ReminderReceiver;
-import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
+import com.ssynhtn.simplenote.R;
+import com.ssynhtn.simplenote.ReminderReceiver;
+import com.ssynhtn.simplenote.data.NoteContract.ReminderEntry;
 
 public class ReminderCursorAdapter extends CursorAdapter{
 

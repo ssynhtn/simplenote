@@ -1,4 +1,4 @@
-package com.ssynhtn.mypagertabs;
+package com.ssynhtn.simplenote;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -26,8 +26,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ssynhtn.mypagertabs.adapter.NoteCursorAdapter;
-import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.adapter.NoteCursorAdapter;
+import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
 
 public abstract class BaseNoteFragment extends Fragment implements LoaderCallbacks<Cursor>{
 

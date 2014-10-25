@@ -6,17 +6,45 @@
         android:id="@+id/action_restore"
         android:icon="@drawable/ic_action_undo"
         android:title="@string/action_restore"
+        android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_delete"
         android:icon="@drawable/ic_action_discard"
         android:title="@string/action_mode_delete"
         app:showAsAction="ifRoom"/>
+    
+    <!-- two actions, shows the second if already has reminder -->
     <item
         android:id="@+id/action_add_reminder"
         android:icon="@drawable/ic_action_alarms"
-        android:title="Reminder"
+        android:title="@string/action_reminder"
         app:showAsAction="ifRoom"/>
+    
+    <item 
+        android:id="@+id/action_reminder_drop_down"
+        android:icon="@drawable/ic_action_alarms"
+        android:title="@string/action_reminder_drop_down"
+        android:visible="false"
+        app:showAsAction="ifRoom">
+        <menu >
+            <!--  
+            <item 
+                android:id="@+id/action_reminder_date"
+                android:title="@string/action_reminder_date"
+                app:showAsAction="ifRoom"/>
+            -->
+            <item 
+                android:id="@+id/action_modify_reminder"
+                android:title="@string/action_modify_reminder"
+                app:showAsAction="ifRoom"/>
+            <item 
+                android:id="@+id/action_remove_reminder"
+                android:title="@string/action_remove_reminder"
+                app:showAsAction="ifRoom"/>
+        </menu>
+        
+    </item>
     <item
         android:id="@+id/action_edit_note"
         android:icon="@drawable/ic_action_edit"

@@ -24,7 +24,11 @@
 
     <!-- NoteDetailFragment action buttons -->
     <string name="action_share_note">Share</string>
-    <string name="action_reminder">Reminder</string>
+    <string name="action_reminder">Add Reminder</string>
+    <string name="action_reminder_drop_down">Modify Reminder</string>
+    <string name="action_modify_reminder">Modify Reminder</string>
+    <string name="action_reminder_date">Reminder Date</string>
+    <string name="action_remove_reminder">Remove Reminder</string>
 
     <!-- ActionBar action_search -->
     <string name="action_search_hint">Search Your Notes</string>

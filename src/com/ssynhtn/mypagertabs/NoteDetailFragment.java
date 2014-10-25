@@ -1,5 +1,6 @@
 package com.ssynhtn.mypagertabs;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -38,15 +39,12 @@ import com.ssynhtn.mypagertabs.TwoPickersDialogFragment.OnTimeSetCallback;
 import com.ssynhtn.mypagertabs.adapter.ReminderCursorAdapter;
 import com.ssynhtn.mypagertabs.data.NoteContract.NoteEntry;
 import com.ssynhtn.mypagertabs.data.NoteContract.ReminderEntry;
+import com.ssynhtn.mypagertabs.util.MyUtilities;
 
 
 public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Cursor>, OnTimeSetCallback {
 	
 	public static final String TAG = NoteDetailFragment.class.getSimpleName();
-	
-//	public static final String EXTRA_NOTE = "extra_note";
-//	private static final String EXTRA_TITLE = "extra_title";
-//	private static final String EXTRA_DATE = "extra_date";
 
 	private static final String EXTRA_NOTE_URI = "extra_note_entry";
 	public static final String EXTRA_NOTE_RECYCLE = "extra_note_recyle";
@@ -64,8 +62,69 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 	// note data to be loaded
 	private String mTitle;
 	private String mNote;
-	private String mDate;
 	private boolean mRecyle;
+	
+	// if this note has reminder
+	private boolean mHasReminder;
+	private long mReminderDate; // reminder in millisenconds 
+	
+	// use a single query handler for all reminder related database operations
+	private AsyncQueryHandler mReminderQueryHandler;
+	
+	// can't initialize this query handler at construction time, because 
+	// getActivity requires at least onAttach being called
+	// so defer the creation of this handler
+	private AsyncQueryHandler getReminderQueryHandler(){
+		if(mReminderQueryHandler == null){
+			mReminderQueryHandler = new AsyncQueryHandler(getActivity().getContentResolver()) {
+				protected void onInsertComplete(int token, Object cookie, Uri uri) {			
+					Long timeMillis = (Long) cookie;
+					
+					AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+					// create alarm for this reminder
+					Intent intent = new Intent(getActivity(), ReminderReceiver.class);
+					intent.putExtra(Intent.EXTRA_SUBJECT, mTitle);
+					intent.putExtra(Intent.EXTRA_TEXT, mNote);
+					// this intent will be delivered to onReceive
+					// and it's data will be used to create an intent to open a NoteDetailActivity
+					// so use mNoteItemUri, rather than uri(for reminder stuff)
+					// if I later want to show reminder stuff on notification
+					// I can pass reminder strings as extra in this mNoteItemUri
+					intent.setData(mNoteItemUri);
+					PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+					am.set(AlarmManager.RTC_WAKEUP, timeMillis, pi);
+					
+					Toast.makeText(getActivity(), "created reminder", Toast.LENGTH_SHORT).show();
+				}
+				protected void onUpdateComplete(int token, Object cookie, int result) {
+					Long timeMillis = (Long) cookie;
+					
+					AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+					Intent intent = new Intent(getActivity(), ReminderReceiver.class);
+					intent.setData(mNoteItemUri);
+					PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+					am.cancel(pi);
+					am.set(AlarmManager.RTC_WAKEUP, timeMillis, pi);
+					
+					Toast.makeText(getActivity(), "Reminder updated", Toast.LENGTH_SHORT).show();
+				}
+				protected void onDeleteComplete(int token, Object cookie, int result) {
+					mHasReminder = false;
+					getActivity().invalidateOptionsMenu();
+					
+					AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+					Intent intent = new Intent(getActivity(), ReminderReceiver.class);
+					intent.setData(mNoteItemUri);
+					PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+					am.cancel(pi);
+					
+					Toast.makeText(getActivity(), "Reminder removed", Toast.LENGTH_SHORT).show();
+				}
+			};
+		}
+		
+		return mReminderQueryHandler;
+	}
 
 	public static interface OnDeleteNoteListener {
 		void onDeleteNote();
@@ -91,9 +150,27 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 			provider.setShareIntent(makeShareIntent());
 		}
 		
-		if(!mRecyle){
+		if(mRecyle){
 			MenuItem restoreItem = menu.findItem(R.id.action_restore);
-			restoreItem.setVisible(false);
+			restoreItem.setVisible(true);
+		}
+	}
+	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		super.onPrepareOptionsMenu(menu);
+		
+		MenuItem addReminderItem = menu.findItem(R.id.action_add_reminder);
+		MenuItem dropDownItem = menu.findItem(R.id.action_reminder_drop_down);
+		
+		addReminderItem.setVisible(!mHasReminder);
+		dropDownItem.setVisible(mHasReminder);
+		
+		if(mHasReminder){
+			String reminderDateString = MyUtilities.makePrettyTime(getActivity(), mReminderDate);
+			MenuItem modifyReminderItem = menu.findItem(R.id.action_modify_reminder);
+			modifyReminderItem.setTitle(reminderDateString);
 		}
 	}
 	
@@ -124,125 +201,101 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 			startActivity(intent);
 			return true;
 		} else if(id == R.id.action_add_reminder){
-			showNewReminderDialog();
+			showNewReminderDialog(null);
+			return true;
+		} else if(id == R.id.action_modify_reminder){
+			showNewReminderDialog(new Date(mReminderDate));
+			return true;
+		} else if(id == R.id.action_remove_reminder){
+			deleteReminder();
+			getActivity().invalidateOptionsMenu();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
-	// if the current note is a recycle note, restore it
-	private void restoreNote(){
-		AsyncQueryHandler handler = new AsyncQueryHandler(getActivity().getContentResolver()) {
-			@Override
-			protected void onUpdateComplete(int token, Object cookie, int result) {
-				Toast.makeText(getActivity(), "note restored", Toast.LENGTH_SHORT).show();
-				mListener.onRestoreNote();
-			}
-		};
-		ContentValues values = new ContentValues(1);
-		values.put(NoteEntry.COLUMN_RECYCLE, 0);
-		handler.startUpdate(0, null, mNoteItemUri, values, null, null);
+	
+	// removes reminder from database and update states
+	private void deleteReminder(){
+		long noteId = ContentUris.parseId(mNoteItemUri);
+		String selection = ReminderEntry.COLUMN_NOTE_ID + " = ?";
+		String[] selectionArgs = {String.valueOf(noteId)};
+		getReminderQueryHandler().startDelete(0, null, ReminderEntry.CONTENT_URI, selection, selectionArgs);
+		
 	}
+	
 
 	private void createReminder(final long timeMillis){
-		ContentResolver resolver = getActivity().getContentResolver();
-		final AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+		mHasReminder = true;
+		mReminderDate = timeMillis;
 
 		long id = ContentUris.parseId(mNoteItemUri);
 		
 		ContentValues values = new ContentValues();
 		values.put(ReminderEntry.COLUMN_NOTE_ID, id);
 		values.put(ReminderEntry.COLUMN_REMINDER_TIME, timeMillis);
-		AsyncQueryHandler handler = new AsyncQueryHandler(resolver) {
-			@Override
-			protected void onInsertComplete(int token, Object cookie, Uri uri) {
-				String logText = "created reminder";
-				
-				// create alarm for this reminder
-				Intent intent = new Intent(getActivity(), ReminderReceiver.class);
-				// this intent will be delivered to onReceive
-				// and it's data will be used to create an intent to open a NoteDetailActivity
-				// so use mNoteItemUri, rather than uri(for reminder stuff)
-				// if I later want to show reminder stuff on notification
-				// I can pass reminder strings as extra in this mNoteItemUri
-				intent.setData(mNoteItemUri);
-				PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-				alarmManager.set(AlarmManager.RTC_WAKEUP, timeMillis, pi);
-				
-				Log.d(TAG, logText);
-				Toast.makeText(getActivity(), logText, Toast.LENGTH_SHORT).show();
-			}
-		};
-		handler.startInsert(0, null, ReminderEntry.CONTENT_URI, values);
+		
+		getReminderQueryHandler().startInsert(0, timeMillis, ReminderEntry.CONTENT_URI, values);
 	}
 	
-	private void createReminder(){
-		final long timeMillis = System.currentTimeMillis() + 10 * 1000; 	// 10 seconds later
-		createReminder(timeMillis);
+	private void updateReminder(final long timeMillis){
+		mReminderDate = timeMillis;		
 		
+		ContentValues values = new ContentValues(1);
+		values.put(ReminderEntry.COLUMN_REMINDER_TIME, timeMillis);
+		String selection = ReminderEntry.COLUMN_NOTE_ID + " = ?";
+		long noteId = ContentUris.parseId(mNoteItemUri);
+		String[] selectionArgs = {String.valueOf(noteId)};
+		getReminderQueryHandler().startUpdate(0, timeMillis, ReminderEntry.CONTENT_URI, values, selection, selectionArgs);
 	}
 	
-	private void addOrRemoveReminder() {
-		// TODO Auto-generated method stub
-		ContentResolver resolver = getActivity().getContentResolver();
-		
-		AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-		
-		long id = ContentUris.parseId(mNoteItemUri);
-		String selection = ReminderEntry.COLUMN_NOTE_ID + " = " + id;
-		Cursor cursor = resolver.query(ReminderEntry.CONTENT_URI, null, selection, null, null);
-		if(cursor != null && cursor.getCount() > 0){
-			// before removing all the reminders, get their ids and remove the real remiders(notifications) first
-			int idIndex = cursor.getColumnIndex(ReminderEntry._ID);
-			while(cursor.moveToNext()){
-				long reminderId = cursor.getLong(idIndex);
-				Uri reminderUri = ContentUris.withAppendedId(ReminderEntry.CONTENT_URI, reminderId);
-				Intent intent = new Intent(getActivity(), ReminderReceiver.class);
-				intent.setData(reminderUri);
-				PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-				alarmManager.cancel(pi);				
-			}
-			
-			// have to remove all reminders pointing to this note
-			int numDeleted = resolver.delete(ReminderEntry.CONTENT_URI, selection, null);
-			String logText = "deleted " + numDeleted + " reminders";
-			
-			Log.d(TAG, logText);
-			Toast.makeText(getActivity(), logText, Toast.LENGTH_SHORT).show();
-		}else {
-			createReminder();
-		}
-		
-	}
+	
 
-	private void deleteCurrentNote(){
-//		String note = getArguments().getString(EXTRA_NOTE);
-		ContentResolver resolver = getActivity().getContentResolver();
-		
-//		String selection = NoteEntry.COLUMN_NOTE + " = ? ";
-//		String[] selectionArgs = new String[]{note};
-		
-		// query the NoteEntry.COLUMN_RECYCLE first to see if this note is in recycle state
-		Cursor cursor = resolver.query(mNoteItemUri, null, null, null, null);
-		boolean isRecyle = false;
-		if(cursor.moveToFirst()){
-			int recycle = cursor.getInt(cursor.getColumnIndex(NoteEntry.COLUMN_RECYCLE));
-			if(recycle == 1)
-				isRecyle = true;
+	private static final int TOKEN_RESTORE_NOTE = 0;
+	private static final int TOKEN_RECYCLE_NOTE = 1;
+	
+	private AsyncQueryHandler mNoteQueryHandler;
+	
+	private AsyncQueryHandler getNoteQueryHandler(){
+		if(mNoteQueryHandler == null){
+			mNoteQueryHandler = new AsyncQueryHandler(getActivity().getContentResolver()) {
+				protected void onDeleteComplete(int token, Object cookie, int result) {
+					Toast.makeText(getActivity(), "delete count: " + result, Toast.LENGTH_SHORT).show();
+					mListener.onDeleteNote();
+				}
+				
+				protected void onUpdateComplete(int token, Object cookie, int result) {
+					if(token == TOKEN_RESTORE_NOTE){
+						Toast.makeText(getActivity(), "note restored", Toast.LENGTH_SHORT).show();
+						mListener.onRestoreNote();				
+					} else if(token == TOKEN_RECYCLE_NOTE){
+						Toast.makeText(getActivity(), "delete count: " + result, Toast.LENGTH_SHORT).show();
+						mListener.onDeleteNote();
+					} else {
+						throw new RuntimeException("Unexpected token");
+					}
+				}
+			};
 		}
-		
-		int numDeleted;
+		return mNoteQueryHandler;
+	}
+	
+	// if the current note is a recycle note, restore it
+	private void restoreNote(){
+		ContentValues values = new ContentValues(1);
+		values.put(NoteEntry.COLUMN_RECYCLE, 0);
+		getNoteQueryHandler().startUpdate(TOKEN_RESTORE_NOTE, null, mNoteItemUri, values, null, null);
+	}
+	
+	private void deleteCurrentNote(){
 		// if in recycle state, then delete, else mark as recycle
-		if(isRecyle){
-			numDeleted = resolver.delete(mNoteItemUri, null, null);			
+		if(mRecyle){
+			getNoteQueryHandler().startDelete(0, null, mNoteItemUri, null, null);
 		}else {
 			ContentValues values = new ContentValues();
 			values.put(NoteEntry.COLUMN_RECYCLE, 1);
-			numDeleted = resolver.update(mNoteItemUri, values, null, null);
+			getNoteQueryHandler().startUpdate(TOKEN_RECYCLE_NOTE, null, mNoteItemUri, values, null, null);
 		}
-		
-		Toast.makeText(getActivity(), "deleted count: " + numDeleted, Toast.LENGTH_SHORT).show();
-		mListener.onDeleteNote();
 	}
 	
 	
@@ -258,14 +311,14 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 		return fragment;
 	}
 	
-	private void showNewReminderDialog(){
+	private void showNewReminderDialog(Date date){
 		// now don't use NewReminderDialog, but TwoPickersDialog to directly show two pickers 
 		// in one dialog
 //		DialogFragment fragment = new NewReminderDialogFragment();
 //		FragmentManager fm = getFragmentManager();
 //		fragment.show(fm, null);
 		
-		TwoPickersDialogFragment fragment = TwoPickersDialogFragment.newInstance(this);
+		TwoPickersDialogFragment fragment = TwoPickersDialogFragment.newInstance(this, date);
 		FragmentManager fm = getFragmentManager();
 		fragment.show(fm, null);
 	}
@@ -301,7 +354,7 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 			
 			@Override
 			public void onClick(View arg0) {
-				showNewReminderDialog();
+				showNewReminderDialog(null);
 				
 			}
 		});
@@ -355,7 +408,7 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 				if(data.moveToFirst()){
 					mTitle = data.getString(data.getColumnIndex(NoteEntry.COLUMN_TITLE));
 					mNote = data.getString(data.getColumnIndex(NoteEntry.COLUMN_NOTE));
-					mDate = data.getString(data.getColumnIndex(NoteEntry.COLUMN_DATE));
+					mRecyle = data.getInt(data.getColumnIndex(NoteEntry.COLUMN_RECYCLE)) == 1;
 					
 					mTitleView.setText(mTitle);
 					mNoteView.setText(mNote);
@@ -367,6 +420,11 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 				Log.d(TAG, "no note data!!, data is " + data);
 			}
 		}else if(id == REMINDER_LOADER_ID){
+			if(data != null && data.moveToFirst()){
+				mHasReminder = true;
+				mReminderDate = data.getLong(data.getColumnIndex(ReminderEntry.COLUMN_REMINDER_TIME));
+				getActivity().invalidateOptionsMenu();
+			}
 			mRemindersAdapter.swapCursor(data);
 		}else{
 			throw new IllegalArgumentException("unexpected loader id: " + id);
@@ -391,7 +449,16 @@ public class NoteDetailFragment extends Fragment implements LoaderCallbacks<Curs
 		// TODO Auto-generated method stub
 		Calendar cal = Calendar.getInstance();
 		cal.set(year, month, day, hour, minute);
-		createReminder(cal.getTimeInMillis());
+		
+		if(mHasReminder){
+			updateReminder(cal.getTimeInMillis());
+		}else {
+			// creates reminder in android system, insert into database and update state
+			createReminder(cal.getTimeInMillis());	
+		}
+		
+		// both kinds needs to update menu
+		getActivity().invalidateOptionsMenu();
 	}
 	
 	

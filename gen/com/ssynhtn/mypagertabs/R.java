@@ -858,14 +858,16 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f080002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f060008;
+        public static final int abc_search_url_text_holo=0x7f06000a;
         public static final int abc_search_url_text_normal=0x7f060001;
         public static final int abc_search_url_text_pressed=0x7f060003;
         public static final int abc_search_url_text_selected=0x7f060002;
         public static final int background_tab_pressed=0x7f060000;
         public static final int light_blue=0x7f060004;
+        public static final int light_blue_translucent=0x7f060008;
         public static final int light_gray=0x7f060007;
         public static final int light_green=0x7f060005;
+        public static final int light_grey_translucent=0x7f060009;
         public static final int light_red=0x7f060006;
     }
     public static final class dimen {
@@ -1088,17 +1090,21 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
         public static final int actionbar_bottom=0x7f020057;
         public static final int background_card=0x7f020058;
-        public static final int background_tab=0x7f020059;
-        public static final int background_tabs=0x7f02005a;
-        public static final int ic_action_alarms=0x7f02005b;
-        public static final int ic_action_cancel=0x7f02005c;
-        public static final int ic_action_copy=0x7f02005d;
-        public static final int ic_action_discard=0x7f02005e;
-        public static final int ic_action_edit=0x7f02005f;
-        public static final int ic_action_search=0x7f020060;
-        public static final int ic_action_undo=0x7f020061;
-        public static final int ic_launcher=0x7f020062;
-        public static final int tabs_pattern=0x7f020063;
+        public static final int background_card_activated=0x7f020059;
+        public static final int background_card_pressed=0x7f02005a;
+        public static final int background_tab=0x7f02005b;
+        public static final int background_tabs=0x7f02005c;
+        public static final int ic_action_alarms=0x7f02005d;
+        public static final int ic_action_cancel=0x7f02005e;
+        public static final int ic_action_copy=0x7f02005f;
+        public static final int ic_action_discard=0x7f020060;
+        public static final int ic_action_edit=0x7f020061;
+        public static final int ic_action_search=0x7f020062;
+        public static final int ic_action_undo=0x7f020063;
+        public static final int ic_alarm_notification=0x7f020064;
+        public static final int ic_launcher=0x7f020065;
+        public static final int list_item_background=0x7f020066;
+        public static final int tabs_pattern=0x7f020067;
     }
     public static final class id {
         public static final int action_add_note=0x7f070050;
@@ -1110,18 +1116,21 @@ containing a value of this type.
         public static final int action_bar_root=0x7f07001a;
         public static final int action_bar_subtitle=0x7f070023;
         public static final int action_bar_title=0x7f070022;
-        public static final int action_cancel_note=0x7f070057;
+        public static final int action_cancel_note=0x7f07005a;
         public static final int action_context_bar=0x7f07001d;
-        public static final int action_copy=0x7f070059;
+        public static final int action_copy=0x7f07005b;
         public static final int action_delete=0x7f070052;
-        public static final int action_edit_note=0x7f070054;
+        public static final int action_edit_note=0x7f070057;
         public static final int action_menu_divider=0x7f070016;
         public static final int action_menu_presenter=0x7f070017;
         public static final int action_mode_close_button=0x7f070024;
+        public static final int action_modify_reminder=0x7f070055;
+        public static final int action_reminder_drop_down=0x7f070054;
+        public static final int action_remove_reminder=0x7f070056;
         public static final int action_restore=0x7f070051;
-        public static final int action_search=0x7f070056;
-        public static final int action_settings=0x7f070058;
-        public static final int action_share=0x7f070055;
+        public static final int action_search=0x7f070059;
+        public static final int action_settings=0x7f07005c;
+        public static final int action_share=0x7f070058;
         public static final int activity_chooser_view_content=0x7f070025;
         public static final int always=0x7f07000b;
         public static final int beginning=0x7f070011;
@@ -1261,9 +1270,8 @@ containing a value of this type.
         public static final int fragment_note_detail=0x7f0d0001;
         public static final int main=0x7f0d0002;
         public static final int new_note=0x7f0d0003;
-        public static final int note_detail=0x7f0d0004;
-        public static final int note_fragment_action_mode=0x7f0d0005;
-        public static final int search_result=0x7f0d0006;
+        public static final int note_fragment_action_mode=0x7f0d0004;
+        public static final int search_result=0x7f0d0005;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1319,13 +1327,17 @@ containing a value of this type.
  NoteFragment ActionMode action buttons 
          */
         public static final int action_mode_delete=0x7f0b0017;
+        public static final int action_modify_reminder=0x7f0b001c;
         public static final int action_reminder=0x7f0b001a;
-        public static final int action_restore=0x7f0b001e;
+        public static final int action_reminder_date=0x7f0b001d;
+        public static final int action_reminder_drop_down=0x7f0b001b;
+        public static final int action_remove_reminder=0x7f0b001e;
+        public static final int action_restore=0x7f0b0022;
         /**  ActionBar action_search 
  ActionBar action_search 
          */
-        public static final int action_search_hint=0x7f0b001b;
-        public static final int action_search_title=0x7f0b001c;
+        public static final int action_search_hint=0x7f0b001f;
+        public static final int action_search_title=0x7f0b0020;
         public static final int action_settings=0x7f0b000f;
         /**  NoteDetailFragment action buttons 
  NoteDetailFragment action buttons 
@@ -1341,7 +1353,7 @@ containing a value of this type.
         public static final int recycle_note_title=0x7f0b0012;
         public static final int title_activity_new_note=0x7f0b0016;
         public static final int title_activity_note_detail=0x7f0b0014;
-        public static final int title_activity_search_result=0x7f0b001d;
+        public static final int title_activity_search_result=0x7f0b0021;
     }
     public static final class style {
         /** 

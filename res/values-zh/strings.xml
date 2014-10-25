@@ -22,7 +22,7 @@
 
     <!-- NoteDetailFragment action buttons -->
     <string name="action_share_note">分享</string>
-    <string name="action_reminder">提醒</string>
+    <string name="action_reminder">设置提醒</string>
 
     <!-- ActionBar action_search -->
     <string name="action_search_hint">搜索全部笔记</string>

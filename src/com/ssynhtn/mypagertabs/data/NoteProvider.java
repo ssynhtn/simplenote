@@ -57,6 +57,7 @@ public class NoteProvider extends ContentProvider {
 		int code = sUriMatcher.match(uri);	
 		SQLiteDatabase db = mHelper.getWritableDatabase();
 		int numDeleted;
+		String deleteType = "Note";
 
 		switch(code){
 		case SINGLE_NOTE: {
@@ -75,6 +76,7 @@ public class NoteProvider extends ContentProvider {
 		}
 
 		case SINGLE_REMINDER: {
+			deleteType = "Reminder";
 			long id = ContentUris.parseId(uri);
 			String mySelection = ReminderEntry._ID + " = " + id;
 			if(selection != null){
@@ -86,6 +88,7 @@ public class NoteProvider extends ContentProvider {
 		}
 
 		case REMINDERS: {
+			deleteType = "Reminder";
 			numDeleted = db.delete(ReminderEntry.TABLE_NAME, selection, selectionArgs);
 			break;
 		}
@@ -96,6 +99,7 @@ public class NoteProvider extends ContentProvider {
 		getContext().getContentResolver().notifyChange(uri, null);
 		//test notify reminder_note_view
 		getContext().getContentResolver().notifyChange(ReminderNoteEntry.CONTENT_URI, null);
+		Log.d(TAG, "deleted " + numDeleted + " " + deleteType);
 		return numDeleted;
 	}
 

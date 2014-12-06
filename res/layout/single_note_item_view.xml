@@ -15,20 +15,24 @@
             android:id="@+id/note_title_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            
+            android:layout_gravity="center"
+            android:gravity="left|center_vertical"
+            android:layout_weight="3"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:textAppearance="?android:textAppearanceLarge"
-            android:text="Note Title" />
+            android:text="@string/long_title_text" />
 
         <TextView
             android:id="@+id/note_date_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="top"
+            android:layout_gravity="center"
             android:gravity="right"
+            android:lines="1"
             android:textAppearance="?android:textAppearanceSmall"
-            android:text="note date" />
+            android:text="@string/long_date_text" />
 
     </LinearLayout>
 
@@ -36,7 +40,9 @@
         android:id="@+id/note_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:ellipsize="end"
         android:textAppearance="?android:textAppearanceMedium"
-        android:text="Note Text" />
+        android:text="@string/long_note_text" />
 
 </LinearLayout>

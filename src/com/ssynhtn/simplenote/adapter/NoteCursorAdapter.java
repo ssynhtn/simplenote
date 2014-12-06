@@ -3,6 +3,9 @@ package com.ssynhtn.simplenote.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +28,16 @@ public class NoteCursorAdapter extends CursorAdapter {
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
 		// TODO Auto-generated method stub
-		String note = MyUtilities.getThreeLineNote(cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_NOTE)));
-		String title = MyUtilities.getOneLineTitle(cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_TITLE)));
+//		String note = MyUtilities.getThreeLineNote(cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_NOTE)));
+		String note = cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_NOTE));
+//		String title = MyUtilities.getOneLineTitle(cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_TITLE)));
+		String title = cursor.getString(cursor.getColumnIndex(NoteEntry.COLUMN_TITLE));
 		Long date = cursor.getLong(cursor.getColumnIndex(NoteEntry.COLUMN_DATE));
+		String prettyDate = MyUtilities.makePrettyTime(context, date);
+		
+//		SpannableString noteText = new SpannableString(prettyDate + " " + note);
+//		noteText.setSpan(new ForegroundColorSpan(context.getResources().getColor(android.R.color.holo_green_light)), 
+//							0, prettyDate.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 		
 		ViewHolder holder = (ViewHolder) view.getTag();
 		holder.titleView.setText(title);

@@ -23,11 +23,10 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ssynhtn.simplenote.adapter.NoteCursorAdapter;
-import com.ssynhtn.simplenote.data.NoteContract.NoteEntry;
+import com.ssynhtn.simplenote.adapter.NoteCursorAdapter.ViewHolder;
 
 public abstract class BaseNoteFragment extends Fragment implements LoaderCallbacks<Cursor>{
 
@@ -80,8 +79,8 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 
 		listView = (ListView) rootView.findViewById(R.id.listview_notes);
 
-		String[] from = new String[]{NoteEntry.COLUMN_TITLE, NoteEntry.COLUMN_NOTE, NoteEntry.COLUMN_DATE};
-		int[] to = {R.id.note_title_textview, R.id.note_textview, R.id.note_date_textview};
+//		String[] from = new String[]{NoteEntry.COLUMN_TITLE, NoteEntry.COLUMN_NOTE, NoteEntry.COLUMN_DATE};
+//		int[] to = {R.id.note_title_textview, R.id.note_textview, R.id.note_date_textview};
 
 		Log.d(TAG, "creating adapter and set list adapter to it");
 //		adapter = new SimpleCursorAdapter(getActivity(), R.layout.single_note_item_view, null, from, to, 0);
@@ -165,10 +164,9 @@ public abstract class BaseNoteFragment extends Fragment implements LoaderCallbac
 					boolean checked = list.valueAt(i);
 					if(checked){
 						View itemView = listView.getChildAt(key);
-						TextView textView = (TextView) itemView.findViewById(R.id.note_textview);
-						String text = textView.getText().toString();
-						TextView titleView = (TextView) itemView.findViewById(R.id.note_title_textview);
-						String title = titleView.getText().toString();
+						ViewHolder holder = (ViewHolder) itemView.getTag();
+						String text = holder.noteView.getText().toString();
+						String title = holder.titleView.getText().toString();
 
 						sb.append(title).append("\n").append(text).append("\n");
 					}

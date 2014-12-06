@@ -3,6 +3,7 @@ package com.ssynhtn.simplenote.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,8 +15,8 @@ import android.util.Log;
 public class MyUtilities {
 	private static final String TAG = MyUtilities.createTag(MyUtilities.class);
 	
-	private static final String DATE_FORMAT = "yyyy MM dd hh mm ss";
-	private static final SimpleDateFormat sFormat = new SimpleDateFormat(DATE_FORMAT);
+	private static final String DATE_FORMAT = "MM dd HH:mm";
+	private static final SimpleDateFormat sFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
 	
 	public static String createTag(Class<?> clazz){
 		return clazz.getSimpleName();

@@ -36,5 +36,14 @@
     <string name="title_activity_search_result">SearchResultActivity</string>
     
     <string name="action_restore">Restore</string>
-
+    
+    
+    <!-- test layout -->
+	<string name="long_title_text">The title could also be very long like its a long long description of the text and its sometimes good to do this because you can just skim the title to know what it is about and dont care about the rest</string>
+	<string name="long_date_text">the date text could also be very long who knows its monday september and stuff</string>
+	<string name="long_note_text">The note is very long but you never know how long it is ahahaha so really how long can it be will it be so long that you would hate it taking up the whole screen? oh no please dont do that to me itll be a disaster</string>
+	
+	<string name="short_title_text">Title</string>
+	<string name="short_date_text">Monday</string>
+	<string name="short_note_text">Note</string>
 </resources>

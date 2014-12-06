@@ -33,7 +33,7 @@
     <!-- ActionBar action_search -->
     <string name="action_search_hint">Search Your Notes</string>
     <string name="action_search_title">Search</string>
-    <string name="title_activity_search_result">SearchResultActivity</string>
+    <string name="title_activity_search_result">Search Result</string>
     
     <string name="action_restore">Restore</string>
     

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">简单记事</string>
+    <string name="hello_world">你好 世界!</string>
     <string name="action_settings">设置</string>
 
     <!-- MainActivity note tabs title -->
@@ -23,6 +24,10 @@
     <!-- NoteDetailFragment action buttons -->
     <string name="action_share_note">分享</string>
     <string name="action_reminder">设置提醒</string>
+    <string name="action_reminder_drop_down">修改提醒</string>
+    <string name="action_modify_reminder">修改提醒</string>
+    <string name="action_reminder_date">提醒时间</string>
+    <string name="action_remove_reminder">删除提醒</string>
 
     <!-- ActionBar action_search -->
     <string name="action_search_hint">搜索全部笔记</string>

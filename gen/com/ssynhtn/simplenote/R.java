@@ -1107,8 +1107,8 @@ containing a value of this type.
         public static final int tabs_pattern=0x7f020067;
     }
     public static final class id {
-        public static final int action_add_note=0x7f0a0053;
-        public static final int action_add_reminder=0x7f0a0056;
+        public static final int action_add_note=0x7f0a0050;
+        public static final int action_add_reminder=0x7f0a0053;
         public static final int action_bar=0x7f0a001c;
         public static final int action_bar_activity_content=0x7f0a0001;
         public static final int action_bar_container=0x7f0a001b;
@@ -1116,21 +1116,21 @@ containing a value of this type.
         public static final int action_bar_root=0x7f0a001a;
         public static final int action_bar_subtitle=0x7f0a0023;
         public static final int action_bar_title=0x7f0a0022;
-        public static final int action_cancel_note=0x7f0a005d;
+        public static final int action_cancel_note=0x7f0a005a;
         public static final int action_context_bar=0x7f0a001d;
-        public static final int action_copy=0x7f0a005e;
-        public static final int action_delete=0x7f0a0055;
-        public static final int action_edit_note=0x7f0a005a;
+        public static final int action_copy=0x7f0a005b;
+        public static final int action_delete=0x7f0a0052;
+        public static final int action_edit_note=0x7f0a0057;
         public static final int action_menu_divider=0x7f0a0002;
         public static final int action_menu_presenter=0x7f0a0003;
         public static final int action_mode_close_button=0x7f0a0024;
-        public static final int action_modify_reminder=0x7f0a0058;
-        public static final int action_reminder_drop_down=0x7f0a0057;
-        public static final int action_remove_reminder=0x7f0a0059;
-        public static final int action_restore=0x7f0a0054;
-        public static final int action_search=0x7f0a005c;
-        public static final int action_settings=0x7f0a005f;
-        public static final int action_share=0x7f0a005b;
+        public static final int action_modify_reminder=0x7f0a0055;
+        public static final int action_reminder_drop_down=0x7f0a0054;
+        public static final int action_remove_reminder=0x7f0a0056;
+        public static final int action_restore=0x7f0a0051;
+        public static final int action_search=0x7f0a0059;
+        public static final int action_settings=0x7f0a005c;
+        public static final int action_share=0x7f0a0058;
         public static final int activity_chooser_view_content=0x7f0a0025;
         public static final int always=0x7f0a000f;
         public static final int beginning=0x7f0a0016;
@@ -1193,9 +1193,6 @@ containing a value of this type.
         public static final int split_action_bar=0x7f0a001e;
         public static final int submit_area=0x7f0a0039;
         public static final int tabMode=0x7f0a0008;
-        public static final int textView1=0x7f0a0052;
-        public static final int textView2=0x7f0a0050;
-        public static final int textView3=0x7f0a0051;
         public static final int time_picker=0x7f0a004f;
         public static final int title=0x7f0a002b;
         public static final int top_action_bar=0x7f0a0020;
@@ -1266,7 +1263,6 @@ containing a value of this type.
         public static final int support_simple_spinner_dropdown_item=0x7f030021;
         public static final int test2=0x7f030022;
         public static final int two_pickers=0x7f030023;
-        public static final int wrap_test=0x7f030024;
     }
     public static final class menu {
         public static final int fragment_note=0x7f0d0000;

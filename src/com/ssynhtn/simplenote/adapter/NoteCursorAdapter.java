@@ -18,11 +18,8 @@ import com.ssynhtn.simplenote.util.MyUtilities;
 
 public class NoteCursorAdapter extends CursorAdapter {
 
-	private Context context;
 	public NoteCursorAdapter(Context context, Cursor c, int flags) {
 		super(context, c, flags);
-		this.context = context;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
